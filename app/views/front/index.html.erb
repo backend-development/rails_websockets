@@ -1,0 +1,15 @@
+<div class="page-header">
+  <h1><%=t '.title', :default => "Stepstones" %></h1>
+</div>
+
+<p>Currently there are # teams on their way in # adventures:</p>
+
+<p>Join them now, go on an adventure:</p>
+
+<% @current_adventures.each do |adv| %>
+  <p><button class="btn btn-small btn-primary" type="button">Join</button>
+  <%= link_to adv.title, adv %></p>
+<% end %>
+
+<p>You can set up an adventure in a few simple steps.</p>
+<p>Set up an adventure today!</p>
