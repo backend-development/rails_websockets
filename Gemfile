@@ -12,6 +12,8 @@ gem 'libv8', '~> 3.11.8'
 gem "less-rails"  #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 gem "twitter-bootstrap-rails"
 
+gem "capistrano", :group => :development
+
 group :test do
   gem "capybara"
 end
