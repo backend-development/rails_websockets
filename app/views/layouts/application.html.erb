@@ -57,12 +57,15 @@
     <div class="container-fluid">
       <div class="row-fluid">
         <div class="span3">
-          <div class="btn-group btn-group-vertical">
-            <% if content_for?(:sidebar) %>
+          <% if content_for?(:sidebar) %>
+            <div class="btn-group btn-group-vertical">
               <h4>What can I do?</h4>
-            <% end %>
-            <%= yield(:sidebar) %>
-          </div><!--/.sigebar-nav -->
+              <%= yield(:sidebar) %>
+            </div><!--/.sigebar-nav -->
+          <% else %>
+            <div class="stepstone_image">
+            </div>
+          <% end %>
         </div><!--/span-->
         <div class="span9">
           <%= bootstrap_flash %>
