@@ -1,12 +1,13 @@
 Stepstones::Application.routes.draw do
 
-  devise_for :users
+  match "me/" => "me#index"
 
-  get "front/index"
+  devise_for :users
 
   resources :adventures do
     resources :steps
   end
 
+  get "front/index"
   root :to => 'front#index'
 end

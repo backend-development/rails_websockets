@@ -29,19 +29,21 @@
           <div class="container-fluid nav-collapse">
             <ul class="nav">
               <li><%= link_to "Adventures", adventures_path  %></li>
-              <% if user_signed_in? %>
-                <li class="divider-vertical"></li>
-                <li><%= link_to 'Edit profile', edit_user_registration_path %> </li>
-                <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
-              <% else %>
-                <li class="divider-vertical"></li>
-                <li><%= link_to "Sign up", new_user_registration_path %> </li>
-                <li><%= link_to "Login", new_user_session_path %></li>
-              <% end %>
+              
+                <li class="user-signed-in divider-vertical"></li>
+                <li class="user-signed-in"><%= link_to 'Edit profile', edit_user_registration_path %> </li>
+                <li class="user-signed-in"><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+
+                <li class="user-anon divider-vertical"></li>
+                <li class="user-anon"><%= link_to "Sign up", new_user_registration_path %> </li>
+                <li class="user-anon"><%= link_to "Login", new_user_session_path %></li>
+
             </ul>
-            <% if user_signed_in? %>
-              <p class="navbar-text pull-right">Logged in as <strong><%= current_user.nickname %></strong></p>
-            <% end %>
+            <p class="navbar-text pull-right">
+              <span class="user-anon nojs">To Login you need Javascript</span>
+              <span class="user-anon">Not logged in</span>
+              <span class="user-signed-in">Logged in as <strong class="show_currentuser_nickname"></strong></span>
+            </p>
 
           </div><!--/.nav-collapse -->
         </div>
@@ -51,7 +53,8 @@
     <div class="container-fluid">
       <div class="row-fluid">
         <div class="span9">
-          <%= bootstrap_flash %>
+          <div id="flash_messages">
+          </div>
           <%= yield %>
         </div>
         <div class="span3">
@@ -77,6 +80,39 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <%= javascript_include_tag "application" %>
+    <script>
+      $('.nojs').hide();
+      var Stepstones = {};
+      Stepstones.onCurrentUser = function() {
+        if( Stepstones.current_user ) {
+          $('.show_currentuser_nickname').html( Stepstones.current_user.nickname );
+          $('.user-anon').hide();
+          $('.user-signed-in').show();
+        }
+        if( Stepstones.flash ) {
+          var html = "";
+          for( type in Stepstones.flash ) {
+            if (type == 'timeout') continue;
+            if (type == 'timedout') continue;
+            html += "<div class='alert fade in alert-" + type + "'><button class='close' data-dismiss='alert'>&times;</button>" 
+                 +  Stepstones.flash[type]
+                 +  "</div>";
+          }
+          if (html.length) {
+            $('#flash_messages').html(html);
+          }
+        }
+      };
+      $.getJSON('/me.json', function(data){
+          Stepstones.current_user = data.current_user;
+          Stepstones.flash        = data.flash;
+          console.log("loaded data for current user")
+          console.dir(Stepstones.current_user)
+          console.log("loaded data for flash")
+          console.dir(Stepstones.flash)
+          Stepstones.onCurrentUser();
+      });
+    </script>
 
   </body>
 </html>

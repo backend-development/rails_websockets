@@ -9,8 +9,7 @@ class PublicViewingTest < ActionDispatch::IntegrationTest
     assert page.has_content?('Write a Rails App')
 
     assert page.has_link? "Adventures", adventures_path
-    assert page.has_link? "Sign Up", new_user_registration_path
-    assert page.has_link? "Login", new_user_session_path
+    assert page.has_content?('To login you need Javascript')
   end
 
 
