@@ -7,7 +7,6 @@ gem 'rails', '3.2.9'
 
 gem 'mysql2'
 
-gem "less-rails"  #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 gem "twitter-bootstrap-rails"
 
 gem "capistrano", :group => :development
@@ -19,6 +18,7 @@ end
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
+  gem "less-rails"  #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
 
