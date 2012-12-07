@@ -6,8 +6,9 @@ gem 'rails', '3.2.9'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'mysql2'
-
 gem "twitter-bootstrap-rails"
+gem 'devise'
+gem 'nokogiri'
 
 gem "capistrano", :group => :development
 
@@ -17,11 +18,9 @@ end
 
 # Gems used only for assets and not required
 # in production environments by default.
-group :development do
+group :assets do
   gem "therubyracer"
   gem "less-rails"  #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
-end
-group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
 

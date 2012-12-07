@@ -7,7 +7,12 @@ class PublicViewingTest < ActionDispatch::IntegrationTest
     visit "/"
     assert page.has_content?('Stepstones')
     assert page.has_content?('Write a Rails App')
+
+    assert page.has_link? "Adventures", adventures_path
+    assert page.has_link? "Sign Up", new_user_registration_path
+    assert page.has_link? "Login", new_user_session_path
   end
+
 
 end
 

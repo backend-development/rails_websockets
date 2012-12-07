@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class AdventuresControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   setup do
     @adventure = adventures(:one)
   end

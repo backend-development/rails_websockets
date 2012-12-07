@@ -1,5 +1,7 @@
 Stepstones::Application.routes.draw do
 
+  devise_for :users
+
   get "front/index"
 
   resources :adventures do
