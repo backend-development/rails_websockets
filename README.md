@@ -20,3 +20,18 @@ As a student:
 As a teacher:
 
 see where your students/teams are at
+
+
+
+develop + deploy
+-------------
+
+to run your own server you need to
+- clone https://github.com/bjelline/stepstones
+- create a config/database.yml 
+- create a config/initializers/secret_token.rb
+
+to deploy with capistrano: the Capfile tries to link to files:
+- database.yml to shared/config/database.yml
+- secret_token.rb to shared/config/initializers/secret_token.rb
+you have to create those two files by hand!

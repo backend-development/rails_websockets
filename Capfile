@@ -12,10 +12,17 @@ task :tail_logs, :roles => :app do
   end
 end
 
-before 'deploy:finalize_update', 'deploy:assets:symlink'
+require "bundler/capistrano"
+after 'deploy:finalize_update', 'deploy:config_symlink'
 after 'deploy:update_code', 'deploy:assets:precompile'
 
 namespace :deploy do
+
+  task :config_symlink, :except => { :no_release => true } do
+    run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+    run "ln -nfs #{shared_path}/config/initializers/secret_token.rb #{release_path}/config/initializers/secret_token.rb"
+  end
+
   namespace :assets do
 
     task :precompile, :roles => :web do
@@ -32,12 +39,7 @@ namespace :deploy do
       end
     end
 
-    task :symlink, roles: :web do
-      run ("rm -rf #{latest_release}/public/assets &&
-            mkdir -p #{latest_release}/public &&
-            mkdir -p #{shared_path}/assets &&
-            ln -s #{shared_path}/assets #{latest_release}/public/assets")
-    end
+
   end
 end
 
