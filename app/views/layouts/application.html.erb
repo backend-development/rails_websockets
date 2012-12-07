@@ -40,7 +40,7 @@
 
             </ul>
             <p class="navbar-text pull-right">
-              <span class="user-anon nojs">To Login you need Javascript</span>
+              <span class="nojs">To Login you need Javascript</span>
               <span class="user-anon">Not logged in</span>
               <span class="user-signed-in">Logged in as <strong class="show_currentuser_nickname"></strong></span>
             </p>
@@ -81,7 +81,12 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <%= javascript_include_tag "application" %>
     <script>
+      // now we know: javascript works.
+      // we don't know yet if the user is logged in.  have
+      // to wait for the getJSON request to return to know that,
+      // so for now we are anon
       $('.nojs').hide();
+      $('.user-anon').show();
       var Stepstones = {};
       Stepstones.onCurrentUser = function() {
         if( Stepstones.current_user ) {
