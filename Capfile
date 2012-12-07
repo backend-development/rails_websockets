@@ -21,6 +21,7 @@ namespace :deploy do
   task :config_symlink, :except => { :no_release => true } do
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
     run "ln -nfs #{shared_path}/config/initializers/secret_token.rb #{release_path}/config/initializers/secret_token.rb"
+    run "rm -rf  #{release_path}/assets"
     run "ln -nfs #{shared_path}/assets #{release_path}/public/assets"
   end
 
