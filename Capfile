@@ -1,3 +1,4 @@
+require "bundler/capistrano"
 load 'deploy'
 #load 'deploy/assets'
 load 'config/deploy' # remove this line to skip loading any of the default tasks
@@ -12,7 +13,6 @@ task :tail_logs, :roles => :app do
   end
 end
 
-require "bundler/capistrano"
 after 'deploy:finalize_update', 'deploy:config_symlink'
 after 'deploy:update_code', 'deploy:assets:precompile'
 

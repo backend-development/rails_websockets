@@ -58,6 +58,9 @@ module Stepstones
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    # prevent connecting to the database
+    config.assets.initialize_on_precompile = false
   end
 end
 
