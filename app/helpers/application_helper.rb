@@ -9,4 +9,8 @@ module ApplicationHelper
       raw "<div class='control-group'>#{html}</div>"
     end
   end
+
+  def user_class( u )
+    raw "user-" + u.id.to_s
+  end
 end

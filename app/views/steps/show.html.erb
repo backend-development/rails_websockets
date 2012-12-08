@@ -1,19 +1,25 @@
 <%- model_class = Step -%>
+<%- @json_backend = "owner/#{@step.adventure.user.id}" -%>
+
 <div class="page-header">
+  <h1><small><%= @step.adventure.title %></small></h1>
   <h1><%= @step.title %></h1>
 </div>
 
 <%= @step.description %>
 
 <% content_for :sidebar do %>
-  <%= link_to t('.back', :default => "back to the adventure"),
-    adventure_path(@adventure), :class => 'btn'  %>
-  <%= link_to t('.edit', :default => "edit this step"),
-              edit_adventure_step_path(@adventure,@step), :class => 'btn btn-primary' %>
-  <%= link_to t('.destroy', :default => "delete this step"),
-              adventure_step_path(@adventure, @step),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
+  <span class="user-admin user-owner <%= user_class( @adventure.user ) %>">
 
+    <%= link_to t('.back', :default => "back to the adventure"),
+      adventure_path(@adventure), :class => 'btn'  %>
+    <%= link_to t('.edit', :default => "edit this step"),
+                edit_adventure_step_path(@adventure,@step), :class => 'btn btn-primary' %>
+    <%= link_to t('.destroy', :default => "delete this step"),
+                adventure_step_path(@adventure, @step),
+                :method => 'delete',
+                :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                :class => 'btn btn-danger' %>
+
+  </span>
 <% end %>

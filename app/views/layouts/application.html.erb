@@ -70,11 +70,21 @@
         </div><!--/span-->
       </div><!--/row-->
 
-      <footer>
-      <p>&copy; <a href="http://brigitte-jellinek.at">Brigitte Jellinek</a> 2012</p>
-      </footer>
-
     </div> <!-- /container -->
+    <footer>
+    <div class="container-fluid">
+      <p class="pull-right"><a href="#">Back to top</a></p>
+      <p>Designed and built by  <a href="http://brigitte-jellinek.at">Brigitte Jellinek</a>
+      while standing on the shoulders of giants: 
+      <a target="_blank" href="http://twitter.com/mdo">@mdo</a> and 
+      <a target="_blank" href="http://twitter.com/fat">@fat</a> who gave us
+      <a target="_blank" href="http://twitter.github.com/bootstrap/">twitter bootstrap</a>.</p>
+      <p>Bootstrap Code licensed under 
+      <a target="_blank" href="http://www.apache.org/licenses/LICENSE-2.0">Apache License v2.0</a>.
+      <a href="http://glyphicons.com">Glyphicons Free</a> licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
+    </div>
+    </footer>
+
 
     <!-- Javascripts
     ================================================== -->
@@ -90,34 +100,41 @@
       var Stepstones = {};
       Stepstones.onCurrentUser = function() {
         if( Stepstones.current_user ) {
+          console.log("this is a logged in user");
           $('.show_currentuser_nickname').html( Stepstones.current_user.nickname );
           $('.user-anon').hide();
           $('.user-signed-in').show();
         }
+        if( Stepstones.current_user && Stepstones.current_user.id == Stepstones.owner) {
+          console.log("this is the owner");
+          $('.user-owner').show();
+        }
         if( Stepstones.flash ) {
           var html = "";
           for( type in Stepstones.flash ) {
-            if (type == 'timeout') continue;
-            if (type == 'timedout') continue;
-            html += "<div class='alert fade in alert-" + type + "'><button class='close' data-dismiss='alert'>&times;</button>" 
-                 +  Stepstones.flash[type]
-                 +  "</div>";
-          }
-          if (html.length) {
-            $('#flash_messages').html(html);
-          }
+          if (type == 'timeout') continue;
+          if (type == 'timedout') continue;
+          html += "<div class='alert fade in alert-" + type + "'><button class='close' data-dismiss='alert'>&times;</button>" 
+                +  Stepstones.flash[type]
+                +  "</div>";
+        }
+        if (html.length) {
+          $('#flash_messages').html(html);
+        }
         }
       };
-      $.getJSON('/me.json', function(data){
-          Stepstones.current_user = data.current_user;
-          Stepstones.flash        = data.flash;
-          console.log("loaded data for current user")
-          console.dir(Stepstones.current_user)
-          console.log("loaded data for flash")
-          console.dir(Stepstones.flash)
-          Stepstones.onCurrentUser();
+      var backend = "/me.json";
+      <% if @json_backend %>
+        backend = "/me/<%= @json_backend %>.json";
+      <% end %>
+      $.getJSON(backend, function(data){
+      Stepstones.current_user = data.current_user;
+        Stepstones.flash        = data.flash;
+        Stepstones.owner        = data.owner;
+        console.log("loaded data")
+        console.dir(data)
+        Stepstones.onCurrentUser();
       });
     </script>
-
   </body>
 </html>

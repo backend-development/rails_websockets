@@ -4,8 +4,8 @@ class StepsControllerTest < ActionController::TestCase
   include Devise::TestHelpers
 
   setup do
-    @adventure = Adventure.create!(:title => "write a rails application", :description => "it's complicated")
-    @step = Step.create!(:title => "run rails new", :description => "let rails do the hard work", :adventure_id => @adventure.id)
+    @adventure = Adventure.create!(:title => "program something", :description => "it's complicated", :user_id => users(:alice).id)
+    @step = Step.create!(:title => "run rails new", :description => "let rails", :adventure_id => @adventure.id)
   end
 
   test "adventure should be there" do

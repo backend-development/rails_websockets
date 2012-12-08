@@ -1,5 +1,7 @@
 class AdventuresController < ApplicationController
   before_filter :find_adventure, :only => [ :show, :edit, :update, :destroy ]
+  before_filter :owner_only, :only => [  :edit, :update, :destroy ]
+  before_filter :authenticate_user!, :only => [  :new, :create ]
 
   # GET /adventures
   # GET /adventures.json
@@ -39,6 +41,7 @@ class AdventuresController < ApplicationController
   # POST /adventures
   # POST /adventures.json
   def create
+    params[:adventure][:user_id] = current_user.id
     @adventure = Adventure.new(params[:adventure])
 
     respond_to do |format|
@@ -81,5 +84,12 @@ private
 
   def find_adventure
     @adventure = Adventure.includes(:steps).find(params[:id])
+  end
+
+  def owner_only
+    if current_user != @adventure.user then
+      Rails.logger.warn("access to #{@adventure} blocked for user #{current_user}")
+        redirect_to adventures_path, notice: 'you cannot ' + request[:action] + ' the adventure ' + @adventure.title
+    end
   end
 end

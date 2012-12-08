@@ -19,6 +19,10 @@
   </tbody>
 </table>
 
+<span class="user-admin user-owner <%= user_class( @adventure.user ) %>">
+
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_adventure_step_path(@adventure),
             :class => 'btn btn-primary' %>
+
+</span>

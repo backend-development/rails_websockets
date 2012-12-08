@@ -1,7 +1,10 @@
 class Adventure < ActiveRecord::Base
-  has_many :steps
-  attr_accessible :title, :description
 
+  belongs_to :user
+  has_many :steps
+  attr_accessible :title, :description, :user_id
+
+  validates_presence_of :title, :user_id
   validates :title, :length => { :minimum => 5 }
 
   scope :current
