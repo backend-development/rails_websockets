@@ -16,6 +16,7 @@
 .user-anon  { display: none; }
 .user-admin { display: none; }
 .user-owner { display: none; }
+.js-only { display: none; }
 
 .stepstone_image {
   background-image: url(<%= asset_path 'Himalayan_Garden_Harewood_02.jpg' %>);
@@ -29,4 +30,9 @@ footer {
   border-top: 1px solid #E5E5E5;
   margin-top: 70px;
   padding: 70px 0px;
+}
+
+#sortable_stepstones .handle {
+  cursor: move;
+  display: none;
 }

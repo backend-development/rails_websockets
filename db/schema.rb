@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121209130326) do
+ActiveRecord::Schema.define(:version => 20121209160809) do
 
   create_table "adventures", :force => true do |t|
     t.string   "title"
@@ -33,9 +33,12 @@ ActiveRecord::Schema.define(:version => 20121209130326) do
     t.integer  "adventure_id"
     t.string   "title"
     t.text     "description"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+    t.integer  "position",     :default => 1
   end
+
+  add_index "stepstones", ["adventure_id", "position"], :name => "index_stepstones_on_adventure_id_and_position"
 
   create_table "users", :force => true do |t|
     t.string   "nickname",               :default => "", :null => false

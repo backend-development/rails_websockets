@@ -31,5 +31,18 @@ describe "Create Adventure" do
       a.title.should == "the new adventure"
       a.user_id == @u.id
     end
+
+    it "can add a new step" do
+      a = FactoryGirl.build(:full_adventure)
+      no_of_stepstones = a.stepstones.count
+      last_position = a.stepstones.last.position
+      visit adventure_path(a)
+      click_link "Add a new Stepstone"
+      fill_in 'stepstone_title', :with => "the next step"
+      click_button "Create Stepstone"
+      a.reload
+      a.stepstones.count.should == no_of_stepstones + 1
+      a.stepstones.last.position.should == last_position + 1
+    end
   end
 end

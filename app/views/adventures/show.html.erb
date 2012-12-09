@@ -10,17 +10,42 @@
 </div>
 
 
-<dl>
+<ul id="sortable_stepstones">
   <% @adventure.stepstones.each do |s| %>
-    <dt><%= link_to s.title, adventure_stepstone_path(@adventure,s) %></dt>
-    <dd><%= s.description %></dd>
+    <%= content_tag_for :li, s do %>
+      <span class="handle">[drag]</span>
+      <b><%= s.title %> <%= link_to "mehr", adventure_stepstone_path(@adventure,s) %></b>
+      <span class="description"><%= s.description %></span>
+    <% end %>
   <% end %>
-</dl>
+</ul>
+
+<% content_for :script do %>
+  $(document).ready(function(){
+    $('#move_stepstones_button').click(function(event){
+      console.log("showing handles to move stuff");
+      $('#sortable_stepstones .handle').show();
+      event.preventDefault();
+    });
+    $('#sortable_stepstones').sortable({
+      axis: 'y',
+      cursor: 'move',
+      update: function(){
+        $.post(
+          '<%= reorder_stepstones_adventure_path(@adventure)-%>',
+          $(this).sortable('serialize') 
+        );
+        $('#sortable_stepstones .handle').hide();
+      }
+    });
+  });
+<% end %>
 
 <span class="user-admin user-owner <%= user_class( @adventure.user ) %>">
 <%= link_to t('.new', :default => "Add a new Stepstone" ),
             new_adventure_stepstone_path(@adventure),
                         :class => 'btn btn-primary' %>
+<%= link_to "Move Stepstones", "#", :class => 'btn js-only', :id => "move_stepstones_button" %>
 </span>
 
 <% content_for :sidebar do %>

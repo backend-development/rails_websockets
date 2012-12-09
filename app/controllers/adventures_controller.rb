@@ -1,6 +1,6 @@
 class AdventuresController < ApplicationController
   before_filter :find_adventure, :only => [ :show, :edit, :update, :destroy ]
-  before_filter :owner_only, :only => [  :edit, :update, :destroy ]
+  before_filter :owner_only, :only => [  :edit, :update, :destroy, :reorder_stepstones ]
   before_filter :authenticate_user!, :only => [  :new, :create ]
 
   # GET /adventures
@@ -36,6 +36,15 @@ class AdventuresController < ApplicationController
 
   # GET /adventures/1/edit
   def edit
+  end
+
+  # POST /adventures
+  # POST /adventures.json
+  def reorder_stepstones
+    params[:stepstone].each_with_index do |id, index|
+      Stepstone.update_all({position: index+1}, {id: id})
+    end
+    render nothing: true
   end
 
   # POST /adventures
@@ -80,7 +89,7 @@ class AdventuresController < ApplicationController
     end
   end
 
-private
+  private
 
   def find_adventure
     @adventure = Adventure.includes(:stepstones).find(params[:id])
@@ -89,7 +98,7 @@ private
   def owner_only
     if current_user != @adventure.user then
       Rails.logger.warn("access to #{@adventure} blocked for user #{current_user}")
-        redirect_to adventures_path, notice: 'you cannot ' + request[:action] + ' the adventure ' + @adventure.title
+      redirect_to adventures_path, notice: 'you cannot ' + request[:action] + ' the adventure ' + @adventure.title
     end
   end
 end

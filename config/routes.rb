@@ -6,6 +6,7 @@ Stepstones::Application.routes.draw do
   devise_for :users
 
   resources :adventures do
+    member { post :reorder_stepstones }
     resources :stepstones
   end
 
