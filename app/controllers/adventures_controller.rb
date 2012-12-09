@@ -1,5 +1,5 @@
 class AdventuresController < ApplicationController
-  before_filter :find_adventure, :only => [ :show, :edit, :update, :destroy ]
+  before_filter :find_adventure, :only => [ :show, :edit, :update, :destroy, :reorder_stepstones ]
   before_filter :owner_only, :only => [  :edit, :update, :destroy, :reorder_stepstones ]
   before_filter :authenticate_user!, :only => [  :new, :create ]
 
