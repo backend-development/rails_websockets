@@ -10,10 +10,12 @@ gem "twitter-bootstrap-rails"
 gem 'devise'
 gem 'nokogiri'
 
+gem "rspec-rails", :group => [:test, :development]
 gem "capistrano", :group => :development
-
 group :test do
+  gem "factory_girl_rails"
   gem "capybara"
+  gem "guard-rspec"
 end
 
 # Gems used only for assets and not required

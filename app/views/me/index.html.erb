@@ -1,1 +1,7 @@
-<h1>You are logged in as <%= current_user.nickname %></h1>
+<h1>You are 
+  <% if current_user.nil? %>
+    not logged in
+  <% else %>
+    logged in as <%= current_user.nickname %>
+  <% end %>
+</h1>
