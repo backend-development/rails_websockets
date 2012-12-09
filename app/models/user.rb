@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
 
-  has_many :adventures
+  has_many :adventures  # user can own an adventure
+  has_many :steps       # when user takes part in adventure, each
+                        # step is recorded seperately
 
 
   # Include default devise modules. Others available are:

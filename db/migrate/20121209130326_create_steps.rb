@@ -1,9 +1,9 @@
 class CreateSteps < ActiveRecord::Migration
   def change
     create_table :steps do |t|
-      t.integer :adventure_id
-      t.string :title
-      t.text :description
+      t.string :state
+      t.integer :user_id
+      t.integer :stepstone_id
 
       t.timestamps
     end

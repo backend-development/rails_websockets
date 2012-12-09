@@ -9,6 +9,7 @@ gem 'mysql2'
 gem "twitter-bootstrap-rails"
 gem 'devise'
 gem 'nokogiri'
+gem 'state_machine'
 
 gem "rspec-rails", :group => [:test, :development]
 gem "capistrano", :group => :development
