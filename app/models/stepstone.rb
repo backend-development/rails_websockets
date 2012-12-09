@@ -1,4 +1,4 @@
-class Step < ActiveRecord::Base
+class Stepstone < ActiveRecord::Base
   belongs_to :adventure
   attr_accessible :adventure_id, :description, :title
 

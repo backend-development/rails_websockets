@@ -1,6 +1,6 @@
-<%- model_class = Step -%>
+<%- model_class = Stepstone -%>
 <div class="page-header">
-  <h1><small>Steps in</small> <%= @adventure.title %></h1>
+  <h1><small>Stepstones in</small> <%= @adventure.title %></h1>
 </div>
 <table class="table table-striped">
   <thead>
@@ -10,10 +10,10 @@
     </tr>
   </thead>
   <tbody>
-    <% @steps.each do |step| %>
+    <% @stepstones.each do |stepstone| %>
       <tr>
-        <td><%= link_to step.title, adventure_step_path(step.adventure, step) %></td>
-        <td><%= step.description %></td>
+        <td><%= link_to stepstone.title, adventure_stepstone_path(stepstone.adventure, stepstone) %></td>
+        <td><%= stepstone.description %></td>
       </tr>
     <% end %>
   </tbody>
@@ -22,7 +22,7 @@
 <span class="user-admin user-owner <%= user_class( @adventure.user ) %>">
 
 <%= link_to t('.new', :default => t("helpers.links.new")),
-            new_adventure_step_path(@adventure),
+            new_adventure_stepstone_path(@adventure),
             :class => 'btn btn-primary' %>
 
 </span>

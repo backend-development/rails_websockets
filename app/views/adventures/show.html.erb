@@ -11,15 +11,15 @@
 
 
 <dl>
-  <% @adventure.steps.each do |s| %>
-    <dt><%= link_to s.title, adventure_step_path(@adventure,s) %></dt>
+  <% @adventure.stepstones.each do |s| %>
+    <dt><%= link_to s.title, adventure_stepstone_path(@adventure,s) %></dt>
     <dd><%= s.description %></dd>
   <% end %>
 </dl>
 
 <span class="user-admin user-owner <%= user_class( @adventure.user ) %>">
-<%= link_to t('.new', :default => "Add a new Step" ),
-            new_adventure_step_path(@adventure),
+<%= link_to t('.new', :default => "Add a new Stepstone" ),
+            new_adventure_stepstone_path(@adventure),
                         :class => 'btn btn-primary' %>
 </span>
 

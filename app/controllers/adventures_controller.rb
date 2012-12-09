@@ -83,7 +83,7 @@ class AdventuresController < ApplicationController
 private
 
   def find_adventure
-    @adventure = Adventure.includes(:steps).find(params[:id])
+    @adventure = Adventure.includes(:stepstones).find(params[:id])
   end
 
   def owner_only

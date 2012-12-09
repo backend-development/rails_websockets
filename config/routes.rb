@@ -6,7 +6,7 @@ Stepstones::Application.routes.draw do
   devise_for :users
 
   resources :adventures do
-    resources :steps
+    resources :stepstones
   end
 
   get "front/index"

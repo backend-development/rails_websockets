@@ -1,4 +1,4 @@
-<%= form_for [@adventure, @step], :html => { :class => 'form-horizontal' } do |f| %>
+<%= form_for [@adventure, @stepstone], :html => { :class => 'form-horizontal' } do |f| %>
   <%= control_group do %>
     <label class="control-label">Adventure</label>
     <div class="controls">
@@ -21,6 +21,6 @@
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-      adventure_steps_path(@adventure), :class => 'btn' %>
+      adventure_stepstones_path(@adventure), :class => 'btn' %>
   </div>
 <% end %>
