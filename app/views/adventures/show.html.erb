@@ -1,62 +1,86 @@
 <%- model_class = Adventure -%>
 <%- @json_backend = "owner/#{@adventure.user.id}" -%>
 <div class="page-header">
-  <h1><%= @adventure.title %></h1>
+  <h1><%= @adventure.title %> <small> by <%= @adventure.user.nickname %></small></h1>
 </div>
 
 <div class="hero-unit">
-  <h2><small>by</small>&nbsp;<%= @adventure.user.nickname %></h2>
   <%= @adventure.description %>
 </div>
 
 
-<ul id="sortable_stepstones">
-  <% @adventure.stepstones.each do |s| %>
-    <%= content_tag_for :li, s do %>
+<ol id="sortable_stepstones">
+  <% @adventure.stepstones.each do |stone| %>
+    <%= content_tag_for :li, stone do %>
       <span class="handle">[drag]</span>
-      <b><%= s.title %> <%= link_to "mehr", adventure_stepstone_path(@adventure,s) %></b>
-      <span class="description"><%= s.description %></span>
+      <b><%= stone.title %> <%= link_to "mehr", adventure_stepstone_path(@adventure,stone) %></b>
+      <span class="description"><%= stone.description %></span>
+      <span class="description">
+
+        <% @s = @steps.find_all {|step| step.stepstone_id == stone.id and step.started?} %>
+        <% if @s.count > 0 %>
+          Gestarted:
+          <% @s.each do |step| %>
+            <%= step.user.nickname %>
+          <% end %>
+        <% end %>
+
+        <% @s = @steps.find_all {|step| step.stepstone_id == stone.id and step.done?} %>
+        <% if @s.count > 0 %>
+          Erledigt:
+          <% @s.each do |step| %>
+            <%= step.user.nickname %>
+          <% end %>
+        <% end %>
+
+      </span>
     <% end %>
   <% end %>
-</ul>
+</ol>
 
 <% content_for :script do %>
-  $(document).ready(function(){
-    $('#move_stepstones_button').click(function(event){
-      console.log("showing handles to move stuff");
-      $('#sortable_stepstones .handle').show();
-      event.preventDefault();
-    });
-    $('#sortable_stepstones').sortable({
-      axis: 'y',
-      cursor: 'move',
-      update: function(){
-        $.post(
-          '<%= reorder_stepstones_adventure_path(@adventure)-%>',
-          $(this).sortable('serialize') 
-        );
-        $('#sortable_stepstones .handle').hide();
-      }
-    });
+$(document).ready(function(){
+  $('#move_stepstones_button').click(function(event){
+    console.log("showing handles to move stuff");
+    $('#sortable_stepstones .handle').show();
+    event.preventDefault();
   });
+  $('#sortable_stepstones').sortable({
+    axis: 'y',
+    cursor: 'move',
+    update: function(){
+      $.post( 
+        '<%= reorder_stepstones_adventure_path(@adventure)-%>', 
+        $(this).sortable('serialize')
+      );
+      $('#sortable_stepstones .handle').hide();
+    }
+  });
+});
 <% end %>
 
-<span class="user-admin user-owner <%= user_class( @adventure.user ) %>">
-<%= link_to t('.new', :default => "Add a new Stepstone" ),
-            new_adventure_stepstone_path(@adventure),
-                        :class => 'btn btn-primary' %>
-<%= link_to "Move Stepstones", "#", :class => 'btn js-only', :id => "move_stepstones_button" %>
-</span>
+<% if @adventure.user == current_user %>
+  <%= link_to t('.new', :default => "Add a new Stepstone" ),
+    new_adventure_stepstone_path(@adventure),
+    :class => 'btn btn-primary' %>
+    <%= link_to "Move Stepstones", "#", :class => 'btn js-only', :id => "move_stepstones_button" %>
+<% end %> 
 
-<% content_for :sidebar do %>
-  <span class="user-admin user-owner <%= user_class( @adventure.user ) %>">
-  <%= link_to t('.edit', :default => t("helpers.links.edit") + " " + model_class), 
-              edit_adventure_path(@adventure), 
-              :class => 'btn btn-primary' %>
-  <%= link_to t('.destroy', :default => t("helpers.links.destroy") + " " + model_class),
-              adventure_path(@adventure),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
-  </span>
-<% end %>
+  <% content_for :sidebar do %>
+    <% if current_user %>
+      <%= link_to "Join", join_adventure_path(@adventure), :class => "btn  btn-primary", :method => 'post' %>
+    <% end %>
+    <% if @adventure.user == current_user %>
+
+      <h5>Admin</h5>
+      <%= link_to t('.edit', :default => t("helpers.links.edit") + " " + model_class), 
+        edit_adventure_path(@adventure), 
+        :class => 'btn btn-primary' %>
+        <%= link_to t('.destroy', :default => t("helpers.links.destroy") + " " + model_class),
+          adventure_path(@adventure),
+          :method => 'delete',
+          :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+          :class => 'btn btn-danger' %>
+        </span>
+      <% end %>
+    <% end %>

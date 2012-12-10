@@ -1,6 +1,8 @@
 class StepstonesController < ApplicationController
   before_filter :find_adventure
-  before_filter :find_step, :only => [ :show, :edit, :update, :destroy ]
+  before_filter :find_stepstone, :only => [ :show, :edit, :update, :destroy, :trans, :join ]
+  before_filter :authenticate_user!, :only => [  :new, :create, :trans, :join ]
+
 
   # GET /stepstones
   # GET /stepstones.json
@@ -17,6 +19,9 @@ class StepstonesController < ApplicationController
   # GET /stepstones/1.json
   def show
     @stepsteon = Stepstone.find(params[:id])
+    if current_user then
+      @current_step = @stepstone.steps.find_by_user_id( current_user.id )
+    end
 
     respond_to do |format|
       format.html # show.html.erb
@@ -39,6 +44,24 @@ class StepstonesController < ApplicationController
   def edit
     @stepstone = Stepstone.find(params[:id])
   end
+
+  # POST /stepstones/:id/trans/:transition
+  # POST /stepstones/:id/trans/:transition.json
+  def trans
+    @step = @stepstone.steps.find_by_user_id( current_user.id )
+    raise "no such transition" unless Step.transitions.include? params[:transition]
+    @step.fire_events( params[:transition]  )
+    redirect_to adventure_stepstone_path( @adventure, @stepstone )
+  end
+
+
+  # POST /adventure/:id/stepstone/:stepstone_id/join
+  # POST /adventure/:id/stepstone/:stepstone_id/join.json
+  def join
+    @stepstone.steps.create( :user_id => current_user.id )
+    redirect_to adventure_stepstone_path(@adventure, @stepstone)
+  end
+
 
   # POST /stepstones
   # POST /stepstones.json
@@ -85,13 +108,15 @@ class StepstonesController < ApplicationController
     end
   end
 
-private
+  private
 
   def find_adventure
     @adventure = Adventure.find(params[:adventure_id])
+    raise "no such adventure" if @adventure.nil?
   end 
 
-  def find_step
-    @stepstone = Stepstone.find(params[:id])
+  def find_stepstone
+    @stepstone = @adventure.stepstones.find(params[:id])
+    raise "no such stepstone" if @stepstone.nil?
   end
 end

@@ -33,7 +33,10 @@ describe "Create Adventure" do
     end
 
     it "can add a new step" do
-      a = FactoryGirl.build(:full_adventure)
+      a = FactoryGirl.build(:full_adventure, :user => @u)
+      a.user = @u
+      a.save!
+      a.user.id.should == @u.id
       no_of_stepstones = a.stepstones.count
       last_position = a.stepstones.last.position
       visit adventure_path(a)

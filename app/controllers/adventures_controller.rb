@@ -1,7 +1,7 @@
 class AdventuresController < ApplicationController
-  before_filter :find_adventure, :only => [ :show, :edit, :update, :destroy, :reorder_stepstones ]
+  before_filter :find_adventure, :only => [ :show, :edit, :update, :destroy, :reorder_stepstones, :join ]
   before_filter :owner_only, :only => [  :edit, :update, :destroy, :reorder_stepstones ]
-  before_filter :authenticate_user!, :only => [  :new, :create ]
+  before_filter :authenticate_user!, :only => [  :new, :create, :join ]
 
   # GET /adventures
   # GET /adventures.json
@@ -17,6 +17,7 @@ class AdventuresController < ApplicationController
   # GET /adventures/1
   # GET /adventures/1.json
   def show
+    @steps = @adventure.steps.includes(:stepstone).includes(:user)
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @adventure }
@@ -38,8 +39,16 @@ class AdventuresController < ApplicationController
   def edit
   end
 
-  # POST /adventures
-  # POST /adventures.json
+  # POST /adventure/:id/join
+  # POST /adventure/:id/join.json
+  def join
+    first_stone = @adventure.stepstones.first
+    first_stone.steps.create( :user_id => current_user.id )
+    redirect_to @adventure
+  end
+
+  # POST /adventure/:id/reorder_stepstones
+  # POST /adventure/:id/reorder_stepstones.json
   def reorder_stepstones
     params[:stepstone].each_with_index do |id, index|
       Stepstone.update_all({position: index+1}, {id: id})

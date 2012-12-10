@@ -7,7 +7,10 @@
 <p>Join them now, go on an adventure:</p>
 
 <% @current_adventures.each do |adv| %>
-  <p><button class="btn btn-small btn-primary" type="button">Join</button>
+  <p>
+  <% if current_user %>
+    <%= button_to "Join", join_adventure_path(adv), :class => "btn btn-small btn-primary" %>
+  <% end %>
   <%= link_to adv.title, adv %></p>
 <% end %>
 

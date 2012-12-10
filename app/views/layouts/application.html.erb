@@ -29,20 +29,23 @@
           <div class="container-fluid nav-collapse">
             <ul class="nav">
               <li><%= link_to "Adventures", adventures_path  %></li>
-              
-                <li class="user-signed-in divider-vertical"></li>
-                <li class="user-signed-in"><%= link_to 'Edit profile', edit_user_registration_path %> </li>
-                <li class="user-signed-in"><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
 
-                <li class="user-anon divider-vertical"></li>
-                <li class="user-anon"><%= link_to "Sign up", new_user_registration_path %> </li>
-                <li class="user-anon"><%= link_to "Login", new_user_session_path %></li>
-
+              <% if current_user %> 
+                <li class="divider-vertical"></li>
+                <li><%= link_to 'Edit profile', edit_user_registration_path %> </li>
+                <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+              <% else %>
+                <li class="divider-vertical"></li>
+                <li><%= link_to "Sign up", new_user_registration_path %> </li>
+                <li><%= link_to "Login", new_user_session_path %></li>
+              <% end %>
             </ul>
             <p class="navbar-text pull-right">
-              <span class="nojs">To Login you need Javascript</span>
-              <span class="user-anon">Not logged in</span>
-              <span class="user-signed-in">Logged in as <strong class="show_currentuser_nickname"></strong></span>
+              <% if current_user %> 
+                Logged in as <strong><%= current_user.nickname %></strong>
+              <% else %>
+                Not logged in
+              <% end %>
             </p>
 
           </div><!--/.nav-collapse -->
@@ -92,49 +95,7 @@
     <%= javascript_include_tag "application" %>
     <script>
       // now we know: javascript works.
-      // we don't know yet if the user is logged in.  have
-      // to wait for the getJSON request to return to know that,
-      // so for now we are anon
       $('.nojs').hide();
-      $('.user-anon').show();
-      var Stepstones = {};
-      Stepstones.onCurrentUser = function() {
-        if( Stepstones.current_user ) {
-          console.log("this is a logged in user");
-          $('.show_currentuser_nickname').html( Stepstones.current_user.nickname );
-          $('.user-anon').hide();
-          $('.user-signed-in').show();
-        }
-        if( Stepstones.current_user && Stepstones.current_user.id == Stepstones.owner) {
-          console.log("this is the owner");
-          $('.user-owner').show();
-        }
-        if( Stepstones.flash ) {
-          var html = "";
-          for( type in Stepstones.flash ) {
-          if (type == 'timeout') continue;
-          if (type == 'timedout') continue;
-          html += "<div class='alert fade in alert-" + type + "'><button class='close' data-dismiss='alert'>&times;</button>" 
-                +  Stepstones.flash[type]
-                +  "</div>";
-        }
-        if (html.length) {
-          $('#flash_messages').html(html);
-        }
-        }
-      };
-      var backend = "/me.json";
-      <% if @json_backend %>
-        backend = "/me/<%= @json_backend %>.json";
-      <% end %>
-      $.getJSON(backend, function(data){
-      Stepstones.current_user = data.current_user;
-        Stepstones.flash        = data.flash;
-        Stepstones.owner        = data.owner;
-        console.log("loaded data")
-        console.dir(data)
-        Stepstones.onCurrentUser();
-      });
     </script>
     <script>
       <%= yield(:script) %>

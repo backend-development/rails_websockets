@@ -12,10 +12,6 @@
  *= require_tree .
  */
 
-.user-signed-in { display: none; }
-.user-anon  { display: none; }
-.user-admin { display: none; }
-.user-owner { display: none; }
 .js-only { display: none; }
 
 .stepstone_image {
@@ -32,7 +28,20 @@ footer {
   padding: 70px 0px;
 }
 
+#sortable_stepstones { 
+  margin-left: 55px; 
+}
+
 #sortable_stepstones .handle {
   cursor: move;
   display: none;
 }
+
+#sortable_stepstones li {
+  padding: 10px 0;
+}
+#sortable_stepstones .description {
+  display: block;
+}
+
+form.button_to , form.button_to div { display: inline; }

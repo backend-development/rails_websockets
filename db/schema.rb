@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121209160809) do
+ActiveRecord::Schema.define(:version => 20121210083511) do
 
   create_table "adventures", :force => true do |t|
     t.string   "title"
@@ -28,6 +28,8 @@ ActiveRecord::Schema.define(:version => 20121209160809) do
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
+
+  add_index "steps", ["stepstone_id", "user_id"], :name => "index_steps_on_stepstone_id_and_user_id"
 
   create_table "stepstones", :force => true do |t|
     t.integer  "adventure_id"
