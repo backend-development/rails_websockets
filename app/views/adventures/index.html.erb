@@ -6,7 +6,6 @@
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:title) %></th>
-      <th><%= model_class.human_attribute_name(:description) %></th>
       <th><%= model_class.human_attribute_name(:user_id) %></th>
     </tr>
   </thead>
@@ -14,7 +13,6 @@
     <% @adventures.each do |adventure| %>
       <tr>
         <td><%= link_to adventure.title, adventure_path(adventure) %></td>
-        <td><%= adventure.description %></td>
         <td><%= adventure.user.nickname %></td>
       </tr>
     <% end %>
