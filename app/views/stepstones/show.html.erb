@@ -18,7 +18,7 @@
 <% elsif @current_step %>
   Mein Status: <%= @current_step.state %>
 <% else %>
-  <%= link_to "Join!", adventure_stepstone_join_path( @adventure, @stepstone ), :method => 'post', :class => 'btn btn-danger' %>
+  <%= link_to "Join!", join_stepstone_path( @adventure, @stepstone ), :method => 'post', :class => 'btn btn-danger' %>
 <% end %>
 
 
