@@ -6,7 +6,7 @@
 </div>
 
 <div class="hero-unit">
-  <%= @stepstone.description %>
+  <%= raw @stepstone.description %>
 </div>
 
 <% if @current_step and @current_step.user_action? %>
@@ -37,3 +37,4 @@
                 :class => 'btn btn-danger' %>
   <% end %>
 <% end %>
+

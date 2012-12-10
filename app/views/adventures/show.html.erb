@@ -5,7 +5,7 @@
 </div>
 
 <div class="hero-unit">
-  <%= @adventure.description %>
+  <%= raw @adventure.description %>
 </div>
 
 
@@ -14,7 +14,6 @@
     <%= content_tag_for :li, stone do %>
       <span class="handle">[drag]</span>
       <b><%= stone.title %> <%= link_to "more", adventure_stepstone_path(@adventure,stone) %></b>
-      <span class="description"><%= stone.description %></span>
       <span class="description">
 
         <% @s = @steps.find_all {|step| step.stepstone_id == stone.id and step.started?} %>

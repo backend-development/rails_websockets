@@ -7,6 +7,7 @@ gem 'rails', '3.2.9'
 
 gem 'mysql2'
 gem "twitter-bootstrap-rails"
+gem 'bootstrap-wysihtml5-rails'
 gem 'devise'
 gem 'nokogiri'
 gem 'state_machine'

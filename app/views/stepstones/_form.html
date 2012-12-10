@@ -24,3 +24,6 @@
       adventure_stepstones_path(@adventure), :class => 'btn' %>
   </div>
 <% end %>
+<% content_for :script do %>
+  $('#stepstone_description').wysihtml5();
+<% end %>

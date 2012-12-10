@@ -18,3 +18,7 @@
                 adventures_path, :class => 'btn' %>
   </div>
 <% end %>
+
+<% content_for :script do %>
+  $('#adventure_description').wysihtml5();
+<% end %>
