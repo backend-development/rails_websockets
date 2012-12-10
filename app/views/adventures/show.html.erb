@@ -13,7 +13,7 @@
   <% @adventure.stepstones.each do |stone| %>
     <%= content_tag_for :li, stone do %>
       <span class="handle">[drag]</span>
-      <b><%= stone.title %> <%= link_to "mehr", adventure_stepstone_path(@adventure,stone) %></b>
+      <b><%= stone.title %> <%= link_to "more", adventure_stepstone_path(@adventure,stone) %></b>
       <span class="description"><%= stone.description %></span>
       <span class="description">
 

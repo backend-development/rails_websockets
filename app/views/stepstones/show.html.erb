@@ -17,7 +17,7 @@
   <% end %>
 <% elsif @current_step %>
   Mein Status: <%= @current_step.state %>
-<% else %>
+<% elsif current_user %>
   <%= link_to "Join!", join_stepstone_path( @adventure, @stepstone ), :method => 'post', :class => 'btn btn-danger' %>
 <% end %>
 
@@ -26,7 +26,7 @@
     <%= link_to t('.back', :default => "back to the adventure"),
       adventure_path(@adventure), :class => 'btn'  %>
 
-  <% if @adventure.belongs_to? current_user %>
+  <% if current_user and @adventure.belongs_to? current_user %>
     <h5>Admin</h5>
     <%= link_to t('.edit', :default => "edit this step"),
                 edit_adventure_stepstone_path(@adventure,@stepstone), :class => 'btn btn-primary' %>
