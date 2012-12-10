@@ -6,7 +6,11 @@ class Step < ActiveRecord::Base
 
   attr_accessible :stepstone_id, :user_id
 
-  state_machine initial: :started do
+  state_machine initial: :created do
+    event :start! do
+      transition :created => :started
+    end
+
     event :finish! do
       transition :started => :done
     end
@@ -42,7 +46,7 @@ class Step < ActiveRecord::Base
   end
 
   def user_action?
-    ['started', 'skipped'].include? self.state
+    ['created', 'started', 'skipped'].include? self.state
   end
   
   def owner_action?

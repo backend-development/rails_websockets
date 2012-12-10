@@ -10,9 +10,9 @@ describe Step do
   end
 
   describe 'states' do
-    describe ':started' do
+    describe ':created' do
       it 'should be an initial state' do
-        @step.started?.should be_true
+        @step.created?.should be_true
       end
 
     end

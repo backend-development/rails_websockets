@@ -10,7 +10,21 @@ module ApplicationHelper
     end
   end
 
-  def user_class( u )
-    raw "user-" + u.id.to_s
+  def avatar_url(user)
+    gravatar_id = Digest::MD5.hexdigest(user.email.downcase)
+    "http://gravatar.com/avatar/#{gravatar_id}.png?s=48"
   end
+
+
+  def avatar_image(user)
+    raw image_tag( 
+        avatar_url(user), 
+        :alt => user.nickname, 
+        :title => user.nickname, 
+        :id => "user_#{user.id}_img",  
+        :class => "user_img",  
+     )
+  end
+
+
 end

@@ -42,8 +42,10 @@ class AdventuresController < ApplicationController
   # POST /adventure/:id/join
   # POST /adventure/:id/join.json
   def join
-    first_stone = @adventure.stepstones.first
-    first_stone.steps.create( :user_id => current_user.id )
+    @adventure.stepstones.each do |stone|
+      Rails.logger.warn("try to create #{stone} for #{current_user}")
+      stone.steps.create( :user_id => current_user.id )
+    end
     redirect_to @adventure
   end
 

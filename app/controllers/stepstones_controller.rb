@@ -18,7 +18,8 @@ class StepstonesController < ApplicationController
   # GET /stepstones/1
   # GET /stepstones/1.json
   def show
-    @stepsteon = Stepstone.find(params[:id])
+    @stepstone = Stepstone.find(params[:id])
+    @steps = @stepstone.steps
     if current_user then
       @current_step = @stepstone.steps.find_by_user_id( current_user.id )
     end
