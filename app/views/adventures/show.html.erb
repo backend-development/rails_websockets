@@ -8,56 +8,17 @@
   <%= raw @adventure.description %>
 </div>
 
-<div id="board">
-  <ol id="sortable_stepstones">
-    <li>
-      <div class="row-fluid">
-        <div class="span3"></div>
-        <div class="span3">Not started</div>
-        <div class="span3">Working</div>
-        <div class="span3">Done</div>
-      </div>
-    </li>
-    <% @adventure.stepstones.each do |stone| %>
-      <%= content_tag_for :li, stone do %>
-
-        <div class="row-fluid">
-          <div class="span3">
-            <span class="handle">[drag]</span>
-            <b><%= stone.title %> <%= link_to "more", adventure_stepstone_path(@adventure,stone) %></b>
-          </div>
-
-
-          <div class="span3"> 
-            <% @s = @steps.find_all {|step| step.stepstone_id == stone.id and ( step.created? or step.skipped? )} %>
-            <% @s.each do |step| %>
-              <%= avatar_image(step.user) %>
-            <% end %>
-          </div>
-
-          <div class="span3"> 
-            <% @s = @steps.find_all {|step| step.stepstone_id == stone.id and step.started?} %>
-            <% @s.each do |step| %>
-              <%= avatar_image(step.user) %>
-            <% end %>
-          </div>
-
-          <div class="span3"> 
-            <% @s = @steps.find_all {|step| step.stepstone_id == stone.id and ( step.done? or step.confirmed?) } %>
-            <% @s.each do |step| %>
-              <%= avatar_image(step.user) %>
-            <% end %>
-          </div>
-
-
-        </div>
-      <% end %>
-    <% end %>
-  </ol>
+<div id="board_holder">
+  <%= render "board" %>
 </div>
 
 <% content_for :script do %>
 $(document).ready(function(){
+  var faye = new Faye.Client('<%= faye_uri %>');
+  faye.subscribe("<%= request.fullpath %>", function (data) {
+    console.log(data);
+    $('#board_holder').html(data.board);
+  });
   $('#move_stepstones_button').click(function(event){
     console.log("showing handles to move stuff");
     $('#sortable_stepstones .handle').show();

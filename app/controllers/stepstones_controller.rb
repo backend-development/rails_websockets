@@ -1,4 +1,6 @@
 class StepstonesController < ApplicationController
+  include Push
+
   before_filter :find_adventure
   before_filter :find_stepstone, :only => [ :show, :edit, :update, :destroy, :trans, :join ]
   before_filter :authenticate_user!, :only => [  :new, :create, :trans, :join ]
@@ -52,6 +54,9 @@ class StepstonesController < ApplicationController
     @step = @stepstone.steps.find_by_user_id( current_user.id )
     raise "no such transition" unless Step.transitions.include? params[:transition]
     @step.fire_events( params[:transition]  )
+
+    broadcast_stepstone_board( @adventure, @stepstone )
+    broadcast_adventure_board( @adventure )
     redirect_to adventure_stepstone_path( @adventure, @stepstone )
   end
 
@@ -60,6 +65,8 @@ class StepstonesController < ApplicationController
   # POST /adventure/:id/stepstone/:stepstone_id/join.json
   def join
     @stepstone.steps.create( :user_id => current_user.id )
+    broadcast_stepstone_board( @adventure, @stepstone )
+    broadcast_adventure_board( @adventure )
     redirect_to adventure_stepstone_path(@adventure, @stepstone)
   end
 

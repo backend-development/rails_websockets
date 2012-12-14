@@ -13,6 +13,8 @@ gem 'nokogiri'
 gem 'state_machine'
 gem 'acts_as_list'
 
+gem 'faye'
+
 gem "rspec-rails", :group => [:test, :development]
 gem "capistrano", :group => :development
 group :test do

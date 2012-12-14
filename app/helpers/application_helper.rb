@@ -26,5 +26,8 @@ module ApplicationHelper
      )
   end
 
+ def faye_uri( postfix = "" )
+   URI.parse("http://#{CONFIG['faye'][Rails.env]['host']}:#{CONFIG['faye'][Rails.env]['port']}/faye").to_s + postfix
+ end
 
 end

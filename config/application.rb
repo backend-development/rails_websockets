@@ -61,6 +61,8 @@ module Stepstones
 
     # prevent connecting to the database
     config.assets.initialize_on_precompile = false
+
+    config.autoload_paths += Dir["#{Rails.root}/lib"]
   end
 end
 

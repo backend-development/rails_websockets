@@ -1,4 +1,6 @@
 class AdventuresController < ApplicationController
+  include Push
+
   before_filter :find_adventure, :only => [ :show, :edit, :update, :destroy, :reorder_stepstones, :join ]
   before_filter :owner_only, :only => [  :edit, :update, :destroy, :reorder_stepstones ]
   before_filter :authenticate_user!, :only => [  :new, :create, :join ]
@@ -46,6 +48,7 @@ class AdventuresController < ApplicationController
       Rails.logger.warn("try to create #{stone} for #{current_user}")
       stone.steps.create( :user_id => current_user.id )
     end
+    broadcast_adventure_board( @adventure )
     redirect_to @adventure
   end
 
