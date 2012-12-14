@@ -14,6 +14,7 @@ gem 'state_machine'
 gem 'acts_as_list'
 
 gem 'faye'
+gem 'thin'
 
 gem "rspec-rails", :group => [:test, :development]
 gem "capistrano", :group => :development
