@@ -21,6 +21,9 @@
 
 <% content_for :script do %>
   $(document).on("page:change", function() {
-    $('#adventure_description').wysihtml5();
+    // test if toolbar already exists
+    if( $('.wysihtml5-toolbar').length == 0 ) {
+      $('#adventure_description').wysihtml5();
+    }
   });
 <% end %>

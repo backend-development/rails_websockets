@@ -26,6 +26,8 @@
 <% end %>
 <% content_for :script do %>
   $(document).on("page:change", function() {
-    $('#stepstone_description').wysihtml5();
+    if( $('.wysihtml5-toolbar').length == 0 ) {
+      $('#stepstone_description').wysihtml5();
+    }
   });
 <% end %>

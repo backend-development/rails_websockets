@@ -12,4 +12,8 @@ class Adventure < ActiveRecord::Base
   def belongs_to?( u )
     self.user.id == u.id
   end
+
+  def self.current_users
+    count_by_sql("SELECT count(distinct user_id) FROM `steps` WHERE state = 'started'")
+  end
 end
