@@ -2,17 +2,43 @@
   <h1><%=t '.title', :default => "Stepstones" %></h1>
 </div>
 
-<p>Currently there are <%= @no_users %> users on their way in <%= @current_adventures.length %> adventures:</p>
+<div class="row-fluid">
 
-<p>Join them now, go on an adventure:</p>
+  <div class="span6">
 
-<% @current_adventures.each do |adv| %>
-  <p>
-  <% if current_user %>
-    <%= button_to "Join", join_adventure_path(adv), :class => "btn btn-small btn-primary" %>
-  <% end %>
-  <%= link_to adv.title, adv %></p>
-<% end %>
+    <p>Currently there are <%= @no_users %> users on their way in <%= @current_adventures.length %> adventures:</p>
 
-<p>You can set up an adventure in a few simple steps.</p>
-<p>Set up an adventure today!</p>
+    <p>Join them now, go on an adventure:</p>
+
+    <% @current_adventures.each do |adv| %>
+      <p>
+      <% if current_user %>
+        <%= button_to "Join", join_adventure_path(adv), :class => "btn btn-small btn-primary" %>
+      <% end %>
+      <%= link_to adv.title, adv %></p>
+    <% end %>
+
+    <p>You can set up an adventure in a few simple steps:</p>
+    <p><%= link_to "new", new_adventure_path, :class => 'btn btn-small btn-danger' %> Adventure</p>
+
+
+  </div>
+  <div class="span6">
+    <p>You are a group of people who all want to do the same complex task in parallell?
+    You want to have an overview of who has done what already?  Then <b>stepstones</b> is
+    the right app for you</p>
+
+    <p>Break the complex task (= an Adventure) into smaller Steps (= a Stepstone).
+    You can use text to describe each step, with minimal html markup and links to
+    any webpage you want.</p>
+
+    <p>Everyone needs to sign up for this app, using an e-mail adress. If you have a <a href="https://gravatar.com/">gravatar</a>
+    image for your e-mail adress this image will be displayed in the app. </p>
+
+    <p>As you work through your adventure step by step don't forget to
+    indicate if you have started, are working on, or are finished with a step.
+    You will see where everyone is on the adventures page.  Changes are
+    displayed in real time, no need to reload the page</p>
+    
+  </div>
+</div>
