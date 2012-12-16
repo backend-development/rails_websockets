@@ -18,10 +18,8 @@
 </div>
 
 <% content_for :script do %>
-  var faye = new Faye.Client('<%= faye_uri %>');
-
-  faye.subscribe("<%= request.fullpath %>", function (data) {
-    $('#board_holder').html(data.board);
+  $(document).ready(function(){
+    switch_channel( "<%= request.fullpath %>" );
   });
 <% end %>
 <% content_for :sidebar do %>

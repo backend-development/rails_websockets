@@ -17,6 +17,23 @@
     <%= javascript_include_tag "application" %>
     <%= javascript_include_tag faye_uri(".js") %>
     <script>
+      
+      // globals for faye: 
+      var faye;  
+      var subscription;
+
+      function switch_channel( channel ) {
+        console.log("unsubscribing from old channels");
+        if( subscription ) {
+          subscription.cancel();
+        }
+        console.log("subscribing to " + channel);
+        subscription = faye.subscribe(channel, function (data) {
+          console.log(data);
+          $('#board_holder').html(data.board);
+        });
+      }
+
       $(document).on("page:change", function(){
         // now we know: javascript works. hide stuff for no-js version
         console.log("page:change");
@@ -25,7 +42,8 @@
 
       $(document).ready(function(){
         // trigger page:change
-        console.log("document.ready");
+        console.log("document.ready, start faye client once");
+        faye = new Faye.Client('<%= faye_uri %>');
         $(document).trigger("page:change");
       });
 

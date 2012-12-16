@@ -13,12 +13,11 @@
 </div>
 
 <% content_for :script do %>
+
+
 $(document).ready(function(){
-  var faye = new Faye.Client('<%= faye_uri %>');
-  faye.subscribe("<%= request.fullpath %>", function (data) {
-    console.log(data);
-    $('#board_holder').html(data.board);
-  });
+  switch_channel( "<%= request.fullpath %>" );
+
   $('#move_stepstones_button').click(function(event){
     console.log("showing handles to move stuff");
     $('#sortable_stepstones .handle').show();
