@@ -14,6 +14,32 @@
 
     <%= stylesheet_link_tag "application", :media => "all" %>
 
+    <%= javascript_include_tag "application" %>
+    <%= javascript_include_tag faye_uri(".js") %>
+    <script>
+      $(document).on("page:change", function(){
+        // now we know: javascript works. hide stuff for no-js version
+        console.log("page:change");
+        $('.nojs').hide();
+      });
+
+      $(document).ready(function(){
+        // trigger page:change
+        console.log("document.ready");
+        $(document).trigger("page:change");
+      });
+
+    </script>
+    <style>
+      <% if current_user %>
+        .user_img {
+           border: 5px white solid;
+        }
+        #user_<%= current_user.id %>_img {
+           border: 5px #ddd solid;
+        }
+      <% end %>
+    </style>
   </head>
   <body>
 
@@ -87,29 +113,8 @@
       <a href="http://glyphicons.com">Glyphicons Free</a> licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
     </div>
     </footer>
-
-
-    <!-- Javascripts
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <%= javascript_include_tag "application" %>
-    <%= javascript_include_tag faye_uri(".js") %>
-    <script>
-      // now we know: javascript works.
-      $('.nojs').hide();
-    </script>
     <script>
       <%= yield(:script) %>
     </script>
-    <style>
-      <% if current_user %>
-        .user_img {
-           border: 5px white solid;
-        }
-        #user_<%= current_user.id %>_img {
-           border: 5px #ddd solid;
-        }
-      <% end %>
-    </style>
   </body>
 </html>

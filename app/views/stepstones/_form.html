@@ -21,9 +21,11 @@
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-      adventure_stepstones_path(@adventure), :class => 'btn' %>
+      adventure_stepstone_path(@adventure, @stepstone), :class => 'btn' %>
   </div>
 <% end %>
 <% content_for :script do %>
-  $('#stepstone_description').wysihtml5();
+  $(document).on("page:change", function() {
+    $('#stepstone_description').wysihtml5();
+  });
 <% end %>

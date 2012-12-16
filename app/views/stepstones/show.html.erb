@@ -9,17 +9,9 @@
   <%= raw @stepstone.description %>
 </div>
 
-<% if @current_step and @current_step.user_action? %>
-  Mein Status: <%= @current_step.state %>
-
-  <% @current_step.state_events.each do |transition| %>
-    <%= link_to transition, transition_path( @adventure, @stepstone, transition), :method => 'post', :class => 'btn btn-danger' %>
-  <% end %>
-<% elsif @current_step %>
-  Mein Status: <%= @current_step.state %>
-<% elsif current_user %>
-  <%= link_to "Join!", join_stepstone_path( @adventure, @stepstone ), :method => 'post', :class => 'btn btn-danger' %>
-<% end %>
+<div id="actions_holder">
+  <%= render "actions" %>
+</div>
 
 <div id="board_holder">
   <%= render "board" %>

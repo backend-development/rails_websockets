@@ -51,23 +51,34 @@ class StepstonesController < ApplicationController
   # POST /stepstones/:id/trans/:transition
   # POST /stepstones/:id/trans/:transition.json
   def trans
-    @step = @stepstone.steps.find_by_user_id( current_user.id )
+    @current_step = @stepstone.steps.find_by_user_id( current_user.id )
     raise "no such transition" unless Step.transitions.include? params[:transition]
-    @step.fire_events( params[:transition]  )
+    @current_step.fire_events( params[:transition]  )
 
     broadcast_stepstone_board( @adventure, @stepstone )
     broadcast_adventure_board( @adventure )
-    redirect_to adventure_stepstone_path( @adventure, @stepstone )
+    respond_to do |format|
+      format.html { redirect_to adventure_stepstone_path(@adventure, @stepstone) }
+      format.js {
+        # when called by ajax with ':remote', just render .js.erb view!
+      }  
+    end
   end
 
 
   # POST /adventure/:id/stepstone/:stepstone_id/join
   # POST /adventure/:id/stepstone/:stepstone_id/join.json
   def join
-    @stepstone.steps.create( :user_id => current_user.id )
+    @current_step = @stepstone.steps.create( :user_id => current_user.id )
     broadcast_stepstone_board( @adventure, @stepstone )
     broadcast_adventure_board( @adventure )
-    redirect_to adventure_stepstone_path(@adventure, @stepstone)
+    respond_to do |format|
+      format.html { redirect_to adventure_stepstone_path(@adventure, @stepstone) }
+      format.js {
+        render 'trans'
+        # when called by ajax with ':remote', just render trans.js.erb view!
+      }  
+    end
   end
 
 

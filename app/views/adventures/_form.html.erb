@@ -15,10 +15,12 @@
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                adventures_path, :class => 'btn' %>
+                adventure_path( @adventure ), :class => 'btn' %>
   </div>
 <% end %>
 
 <% content_for :script do %>
-  $('#adventure_description').wysihtml5();
+  $(document).on("page:change", function() {
+    $('#adventure_description').wysihtml5();
+  });
 <% end %>
