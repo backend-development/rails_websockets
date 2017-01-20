@@ -1,9 +1,0 @@
-#Erlaubte Dateiendungen für Uploads
-faye:
-  development:
-    host: localhost
-    port: 9292
-  production:
-    host: multimediatechnology.at
-    port: 9292
-
