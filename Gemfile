@@ -39,7 +39,7 @@ gem 'jquery-rails'
 # read secrets from .env file
 gem 'dotenv-rails', :groups => [:development, :test]
 gem 'omniauth'
-gem 'omniauth-oauth2'
+gem 'omniauth-oauth2', '~> 1.3.1'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production

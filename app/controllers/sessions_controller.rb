@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
 
     if user
       session[:user_id] = user.id
-      session[:access_token] = user.access_token
+      session[:access_token] = user.token
       redirect_to root_path, notice: 'Logged in'
     else
       redirect_to login_path, alert: 'Log in failed'

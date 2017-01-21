@@ -5,5 +5,5 @@ Rails.application.config.middleware.use OmniAuth::Builder do
            ENV['FHS_KEY'],
            ENV['FHS_SECRET'],
            name: 'fhs_full',
-           scope: 'identity schedule'
+           scope: 'identity'
 end

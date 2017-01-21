@@ -10,7 +10,7 @@
 
   <body>
     <% if current_user %> 
-      Logged in as <%= current_user.uid %>@<%= current_user.provider %>
+      <%= current_user %>
       <%= link_to "log out", logout_path %>
     <% else %>
       <%= link_to "log in", "/auth/fhs_full/" %> 
