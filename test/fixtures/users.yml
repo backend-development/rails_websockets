@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  provider: fhs
+  uid: 3
+  fhs_username: bjelline  
+  full_name: Brigitte Jellinek
+  first_name: Brigitte
+  last_name: Jellinek
+  email: brigitte.jellinek@fh-salzburg.ac.at
+  token: MyString
+
+two:
+  provider: MyString
+  uid: MyString
+  fhs_username: MyString
+  full_name: MyString
+  first_name: MyString
+  last_name: MyString
+  email: MyString
+  token: MyString

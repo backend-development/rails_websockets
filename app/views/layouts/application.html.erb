@@ -4,11 +4,18 @@
     <title>Stepstones</title>
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
   </head>
 
   <body>
+    <% if current_user %> 
+      Logged in as <%= current_user.uid %>@<%= current_user.provider %>
+      <%= link_to "log out", logout_path %>
+    <% else %>
+      <%= link_to "log in", "/auth/fhs_full/" %> 
+    <% end %>
+
     <%= yield %>
   </body>
 </html>
