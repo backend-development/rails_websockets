@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '2.3.3'
+
 # ensure https is used
 # http://stackoverflow.com/questions/41454333/meaning-of-new-block-git-sourcegithub-in-gemfile#answer-41533565
 git_source(:github) do |repo_name|
