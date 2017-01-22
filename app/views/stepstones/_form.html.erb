@@ -1,0 +1,22 @@
+<%= form_for([@adventure, stepstone]) do |f| %>
+  <% if stepstone.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(stepstone.errors.count, "error") %> prohibited this stepstone from being saved:</h2>
+
+      <ul>
+      <% stepstone.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

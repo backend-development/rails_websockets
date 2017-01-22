@@ -1,0 +1,18 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  description: 1.stepstone
+  adventure: one
+
+two:
+  description: 2.stepstone
+  adventure: one
+
+three:
+  description: step a
+  adventure: two
+
+four:
+  description: step b
+  adventure: two
+

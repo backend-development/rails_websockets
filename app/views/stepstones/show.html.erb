@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @stepstone.description %>
+</p>
+
+<%= link_to 'Edit', edit_adventure_stepstone_path(@stepstone.adventure, @stepstone) %> |
+<%= link_to 'Back', adventure_stepstones_path(@adventure) %>
