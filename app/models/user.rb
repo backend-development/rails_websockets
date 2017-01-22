@@ -3,7 +3,8 @@ class User < ApplicationRecord
     # identify user by provider + uid
     Rails.logger.warn(auth_hash)
     user = find_or_create_by(uid: auth_hash['uid'], provider: auth_hash['provider'])
-
+    Rails.logger.warn(auth_hash['credentials'])
+    Rails.logger.warn(auth_hash['credentials']['token'])
     user.token = auth_hash['credentials']['token']
     #user.token_expires_at = DateTime.strptime(auth_hash['credentials']['expires_at'].to_s, '%s')
 

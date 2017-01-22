@@ -1,4 +1,9 @@
 class SessionsController < ApplicationController
+  def login_for_testing
+    session[:user_id] = User.first.id
+    redirect_to root_path, notice: 'Logged in'
+  end
+
   def create
     user = User.find_or_create_with_omniauth(request.env['omniauth.auth'])
 
