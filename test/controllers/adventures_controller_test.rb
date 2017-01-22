@@ -39,8 +39,7 @@ class AdventuresControllerTest < ActionDispatch::IntegrationTest
         post adventures_url, params: {
           adventure: {
             description: @adventure.description,
-            title: @adventure.title,
-            user_id: @adventure.user_id
+            title: @adventure.title
           }
         }
       end
@@ -57,8 +56,7 @@ class AdventuresControllerTest < ActionDispatch::IntegrationTest
       patch adventure_url(@adventure), params: {
         adventure: {
           description: @adventure.description,
-          title: @adventure.title,
-          user_id: @adventure.user_id
+          title: @adventure.title
         }
       }
       assert_redirected_to adventure_url(@adventure)
