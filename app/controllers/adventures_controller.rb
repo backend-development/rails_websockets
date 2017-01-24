@@ -1,5 +1,5 @@
 class AdventuresController < ApplicationController
-  before_action :set_adventure, only: [:show, :edit, :update, :destroy]
+  before_action :set_adventure, only: [:show, :edit, :update, :sort, :destroy]
   before_action :authenticate_user!, only: [:new, :edit, :update, :create, :destroy]
   # GET /adventures
   def index
@@ -31,6 +31,21 @@ class AdventuresController < ApplicationController
     end
   end
 
+  # PATCH/PUT /adventures/1/sort
+  def sort
+    p = params.require(:adventure).permit(stepstone_order: [])
+    Rails.logger.warn(p[:stepstone_order])
+
+    new_sortorder = 1
+    p[:stepstone_order].each do |s|
+      stepstone = @adventure.stepstones.find(s)
+      Rails.logger.warn("update stepstone #{s} to order #{new_sortorder}")
+      stepstone.update!(sortorder: new_sortorder)
+      new_sortorder += 1
+    end
+    head :ok
+  end
+
   # PATCH/PUT /adventures/1
   def update
     if @adventure.update(adventure_params)
@@ -47,13 +62,14 @@ class AdventuresController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_adventure
-      @adventure = Adventure.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def adventure_params
-      params.require(:adventure).permit(:title, :description)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_adventure
+    @adventure = Adventure.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def adventure_params
+    params.require(:adventure).permit(:title, :description)
+  end
 end

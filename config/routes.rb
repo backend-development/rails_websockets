@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   resources :adventures do
     resources :stepstones
+    member do
+      post 'sort'
+    end
   end
 
   root 'adventures#index'

@@ -47,6 +47,19 @@ class AdventuresControllerTest < ActionDispatch::IntegrationTest
       assert_redirected_to adventure_url(Adventure.last)
     end
 
+    test 'should order stepstones' do
+      post sort_adventure_url(@adventure), params: {
+        adventure: {
+          stepstone_order: [
+            stepstones(:three).id,
+            stepstones(:one).id,
+            stepstones(:two).id
+          ]
+        }
+      }
+      assert_response :success
+    end
+
     test 'should get edit' do
       get edit_adventure_url(@adventure)
       assert_response :success
