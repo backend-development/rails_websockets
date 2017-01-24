@@ -1,12 +1,11 @@
 class User < ApplicationRecord
+  has_many :steps, dependent: :destroy
+  has_many :stepstones, through: :steps
+
   def self.find_or_create_with_omniauth(auth_hash)
     # identify user by provider + uid
-    Rails.logger.warn(auth_hash)
     user = find_or_create_by(uid: auth_hash['uid'], provider: auth_hash['provider'])
-    Rails.logger.warn(auth_hash['credentials'])
-    Rails.logger.warn(auth_hash['credentials']['token'])
     user.token = auth_hash['credentials']['token']
-    #user.token_expires_at = DateTime.strptime(auth_hash['credentials']['expires_at'].to_s, '%s')
 
     # additional info about the user
     if auth_hash['info']

@@ -11,11 +11,23 @@ one:
   token: MyString
 
 two:
-  provider: MyString
-  uid: MyString
-  fhs_username: MyString
-  full_name: MyString
-  first_name: MyString
-  last_name: MyString
-  email: MyString
+  provider: fhs
+  uid: 1
+  fhs_username: fhs1
+  full_name: Some Prof
+  first_name: Some
+  last_name: Prof
+  email: noone@nowhere.com
   token: MyString
+
+two:
+  provider: fhs
+  uid: 2
+  fhs_username: fhs2
+  full_name: Some Student
+  first_name: Some
+  last_name: Student
+  email: nostudent@nowhere.com
+  token: MyString
+
+  

@@ -8,6 +8,8 @@
 #
 
 # brigitte = User.create({ provider: 'fhsfull', uid: 3 })
+s1 = User.create({ provider: 'fhsfull', uid: 1 })
+s2 = User.create({ provider: 'fhsfull', uid: 2 })
 
 Status.create([ { status: 'not started', sortorder: 1 },
                 { status: 'working', sortorder: 2 },

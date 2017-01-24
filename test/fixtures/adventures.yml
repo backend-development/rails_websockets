@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
-  description: MyText
-  user: one
+  title: The first adventure
+  description: The first adventure is first
+  user: two
 
 two:
-  title: MyString
-  description: MyText
+  title: the Second adventure
+  description: the 2nd one is even better
   user: two
