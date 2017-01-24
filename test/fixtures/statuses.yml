@@ -1,0 +1,19 @@
+not:
+  status: 'not started'
+  sortorder: 1
+
+working:
+  status: 'working'
+  sortorder: 2
+
+blocked:
+  status: 'blocked'
+  sortorder: 3
+
+finished:
+  status: 'finished'
+  sortorder: 4
+
+failed:
+  status: 'failed'
+  sortorder: 5

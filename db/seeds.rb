@@ -7,14 +7,21 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 #
 
-brigitte = User.create({ provider: 'fhsfull', uid: 3 })
+# brigitte = User.create({ provider: 'fhsfull', uid: 3 })
 
-u8 = brigitte.adventure.create({ title: 'u8 - testing for stars', 
-  description: 'work through the example app to learn about testing in rails'})
+Status.create([ { status: 'not started', sortorder: 1 },
+                { status: 'working', sortorder: 2 },
+                { status: 'blocked', sortorder: 3  },
+                { status: 'finished', sortorder: 4  },
+                { status: 'failed', sortorder: 5  }
+]);
 
-u8.stepstones.create({
-  titel: 'install the app from https://github.com/backend-development/rails-example-testing-for-stars, start it on localhost,  and run the existing tests in the commandline with `rails test`'
-})
-u8.stepstones.create({
-  titel: 'install the app from https://github.com/backend-development/rails-example-testing-for-stars, start it on localhost,  and run the existing tests in the commandline with `rails test`'
-})
+# u8 = brigitte.adventure.create({ title: 'u8 - testing for stars', 
+#   description: 'work through the example app to learn about testing in rails'})
+
+# u8.stepstones.create({
+#   titel: 'install the app from https://github.com/backend-development/rails-example-testing-for-stars, start it on localhost,  and run the existing tests in the commandline with `rails test`'
+# })
+# u8.stepstones.create({
+#   titel: 'install the app from https://github.com/backend-development/rails-example-testing-for-stars, start it on localhost,  and run the existing tests in the commandline with `rails test`'
+# })
