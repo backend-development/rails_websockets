@@ -3,16 +3,20 @@
 one:
   description: 1.stepstone
   adventure: one
+  sortorder: 1
 
 two:
   description: 2.stepstone
   adventure: one
+  sortorder: 2
 
 three:
-  description: step a
-  adventure: two
+  description: 3.stepstone
+  adventure: one
+  sortorder: 3
 
 four:
   description: step b
   adventure: two
+  sortorder: 1
 

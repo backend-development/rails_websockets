@@ -3,6 +3,7 @@ class StepstonesController < ApplicationController
   before_action :set_stepstone, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:new, :edit, :update, :create, :destroy]
 
+
   # GET /stepstones
   def index
     @stepstones = @adventure.stepstones

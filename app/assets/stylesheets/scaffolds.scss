@@ -22,7 +22,10 @@ body {
     animation-duration: 1s;
 }
 
-
+.sortable li:hover {
+  background-color: #ddd;
+  border: 1px #aaa solid;
+}
 
 
 section#main {
