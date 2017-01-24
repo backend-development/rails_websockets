@@ -9,16 +9,37 @@
   </head>
 
   <body>
-    <% if current_user %> 
-      <%= current_user %>
-      <%= link_to "log out", logout_path %>
-    <% else %>
-      <%= link_to "log in", "/auth/fhs_full/" %> 
-      <% if ENV['RAILS_ENV'] == 'development' %>
-        <%= link_to "log in without password", "/auth/testing" %> 
-      <% end %>
-    <% end %>
-
-    <%= yield %>
+    <header>
+      <div class="holder">
+        <nav>
+          <%= link_to_unless_current "Home", root_path %>
+        </nav>
+        <nav>
+          <% if current_user %> 
+            <%= current_user %>
+            <%= link_to "log out", logout_path %>
+          <% else %>
+            <%= link_to "log in", "/auth/fhs_full/" %> 
+            <% if ENV['RAILS_ENV'] == 'development' %>
+              |
+              <%= link_to "log in without password", "/auth/testing" %> 
+            <% end %>
+          <% end %>
+        </nav>
+      </div>
+    </header>
+    <section id="main" class="holder">
+      <div>
+        <% if notice %>
+          <p class="notice"><%= notice %></p>
+        <% end %>
+        <%= yield %>
+      </div>
+    </section>
+    <footer>
+      <div class="holder">
+        by Brigitte Jellinek, published 2017
+      </div>
+    </footer>
   </body>
 </html>

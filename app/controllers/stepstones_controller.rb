@@ -1,6 +1,7 @@
 class StepstonesController < ApplicationController
   before_action :set_adventure
   before_action :set_stepstone, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :edit, :update, :create, :destroy]
 
   # GET /stepstones
   def index
@@ -25,7 +26,7 @@ class StepstonesController < ApplicationController
     @stepstone = @adventure.stepstones.build(stepstone_params)
 
     if @stepstone.save
-      redirect_to adventure_stepstone_url(@adventure, @stepstone), notice: 'Stepstone was successfully created.'
+      redirect_to adventure_stepstones_url(@adventure), notice: 'Stepstone was successfully created.'
     else
       render :new
     end

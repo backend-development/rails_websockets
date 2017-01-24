@@ -4,14 +4,61 @@ body {
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;
-  margin: 33px;
+  margin: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+  min-height: 100vh;
+}
+
+@keyframes flash-animation {  
+    from { background: yellow; }
+    to   { background: default; }
+}
+
+.notice {
+    animation-name: flash-animation;
+    animation-duration: 1s;
+}
+
+
+
+
+section#main {
+  flex: 1;
+}
+header {
+  background-color: #DDD;
+}
+footer {
+  background-color: #DDD;
+}
+
+.holder {
+  width: 100%;
+  max-width: 1000px;
+  padding: 20px;
+  margin: 0px auto; 
+  display: flex;
+  flex-direction: rows;
+  justify-content: space-between;  
+}
+
+nav {
+}
+nav a, h1 a, h2 a {
+  text-decoration: none;
+}
+nav a:hover, h1 a:hover, h2 a:hover {
+  text-decoration: underline;
 }
 
 p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;
-  margin: 33px;
+  /* margin: 33px; */
 }
 
 pre {

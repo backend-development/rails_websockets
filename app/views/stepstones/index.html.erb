@@ -1,31 +1,25 @@
-<p id="notice"><%= notice %></p>
 
-<h1>Stepstones</h1>
+<h1><%= @adventure %></h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<%= @adventure.description %>
 
-  <tbody>
-    <% @stepstones.each do |stepstone| %>
-      <tr>
-        <td><%= stepstone.description %></td>
-        <td><%= link_to 'Show', adventure_stepstone_path(@adventure, stepstone) %></td>
-        <% if user_signed_in? %>
-          <td><%= link_to 'Edit', edit_adventure_stepstone_path(stepstone.adventure, stepstone) %></td>
-          <td><%= link_to 'Destroy', adventure_stepstone_path(@adventure, stepstone), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>
-      </tr>
+
+<p>This Adventure consists of <%= @stepstones.count %> steps:</p>
+
+
+<ol>
+<% @stepstones.each do |stepstone| %>
+  <li>
+    <%= stepstone.description %>
+    <% if current_user == @adventure.user  %>
+    <%= link_to 'Edit', edit_adventure_stepstone_path(stepstone.adventure, stepstone) %>
+    | <%= link_to 'Destroy', adventure_stepstone_path(@adventure, stepstone), method: :delete, data: { confirm: 'Are you sure?' } %></td>
     <% end %>
-  </tbody>
-</table>
+  </li>
+<% end %>
+</ol>
 
-<br>
 
-<% if user_signed_in? %>
+<% if current_user == @adventure.user %>
   <%= link_to 'New Stepstone', new_adventure_stepstone_path(@adventure) %> 
 <% end %>
