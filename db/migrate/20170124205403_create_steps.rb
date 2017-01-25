@@ -7,5 +7,6 @@ class CreateSteps < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
+    add_index(:steps, [:user_id, :stepstone_id], unique: true)
   end
 end

@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_many :steps, dependent: :destroy
   has_many :stepstones, through: :steps
+  has_many :adventures, -> { distinct }, through: :stepstones
 
   def self.find_or_create_with_omniauth(auth_hash)
     # identify user by provider + uid

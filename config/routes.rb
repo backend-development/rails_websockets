@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     resources :stepstones
     member do
       post 'sort'
+      post 'start'
     end
   end
 

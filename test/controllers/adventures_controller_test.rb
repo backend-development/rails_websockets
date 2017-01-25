@@ -29,6 +29,11 @@ class AdventuresControllerTest < ActionDispatch::IntegrationTest
       get auth_testing_path
     end
 
+    test 'should start' do
+      post start_adventure_url(@adventure)
+      assert_redirected_to adventure_stepstones_url(@adventure)
+    end
+
     test 'should get new' do
       get new_adventure_url
       assert_response :success

@@ -36,3 +36,27 @@
 <% if current_user == @adventure.user %>
   <%= link_to 'New Stepstone', new_adventure_stepstone_path(@adventure) %> 
 <% end %>
+
+
+<h2>Status</h2>
+
+<% unless current_user.adventures.include?(@adventure) %>
+  <%= button_to("start", start_adventure_path(@adventure)) %>
+<% end %>
+
+<table border="1">
+  <tr>
+    <td style="width: 15%;"></td>
+    <% @statuses.each do |status| %>
+      <th style="width: 15%;"><%= status.status %></th>
+    <% end %>
+  </tr>
+  <% @stepstones.each_with_index do |stepstone, i| %>
+    <tr>
+      <td><%= i+1 %>) </td>
+      <% @statuses.each do |status| %>
+        <td style="width: 15%;"><%= stepstone.steps.where(:status => status).join(', ') %></td>
+      <% end %>      
+    </tr>
+  <% end %>
+</table>

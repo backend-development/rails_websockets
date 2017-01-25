@@ -1,5 +1,5 @@
 class AdventuresController < ApplicationController
-  before_action :set_adventure, only: [:show, :edit, :update, :sort, :destroy]
+  before_action :set_adventure, only: [:show, :edit, :update, :sort, :start, :destroy]
   before_action :authenticate_user!, only: [:new, :edit, :update, :create, :destroy]
   # GET /adventures
   def index
@@ -44,6 +44,18 @@ class AdventuresController < ApplicationController
       new_sortorder += 1
     end
     head :ok
+  end
+
+  # PATCH/PUT /adventures/1/start
+  def start
+    not_started = Status.where(status:'not started').first
+    @adventure.stepstones.each do |s|
+      begin
+        current_user.steps.create({ stepstone: s, status: not_started})
+      rescue
+      end
+    end
+    redirect_to adventure_stepstones_path(@adventure)
   end
 
   # PATCH/PUT /adventures/1

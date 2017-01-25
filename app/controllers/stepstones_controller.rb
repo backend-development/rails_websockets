@@ -6,7 +6,8 @@ class StepstonesController < ApplicationController
 
   # GET /stepstones
   def index
-    @stepstones = @adventure.stepstones
+    @statuses = Status.all
+    @stepstones = @adventure.stepstones.includes(:steps).includes(:users)
   end
 
   # GET /stepstones/1

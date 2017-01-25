@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20170124205403) do
     t.datetime "updated_at",   null: false
     t.index ["status_id"], name: "index_steps_on_status_id", using: :btree
     t.index ["stepstone_id"], name: "index_steps_on_stepstone_id", using: :btree
+    t.index ["user_id", "stepstone_id"], name: "index_steps_on_user_id_and_stepstone_id", unique: true, using: :btree
     t.index ["user_id"], name: "index_steps_on_user_id", using: :btree
   end
 

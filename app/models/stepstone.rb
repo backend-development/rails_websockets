@@ -4,6 +4,4 @@ class Stepstone < ApplicationRecord
   has_many :users, through: :steps
 
   validates :description, length: { minimum: 8 }
-
-  default_scope { order('sortorder') }
 end
