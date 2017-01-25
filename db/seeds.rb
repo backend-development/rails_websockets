@@ -14,14 +14,14 @@ Status.create([ { status: 'not started', sortorder: 1 },
                 { status: 'failed', sortorder: 5  }
 ]);
 
-u8 = brigitte.adventure.create({ title: 'u8 - testing for stars', 
+u8 = Adventure.create({ user: brigitte, title: 'u8 - testing for stars', 
   description: 'work through the example app to learn about testing in rails'})
 
 u8.stepstones.create([
-  { sortorder: 1, titel: 'install the app from https://github.com/backend-development/rails-example-testing-for-stars, start it on localhost,  and run the existing tests in the commandline with rails test'},
-  { sortorder: 2, titel: 'Write a test to check that a newly created user has a `no_stars` set to zero. This test should immediately pass, the default value was set correctly in the migration that created the users table' },
-  { sortorder: 3, title: 'Write a new method in the user model: a method named `add_star!` that increases the number of stars by one. But: Write the test first. Make sure it fails, then implement the changes in the model and make sure the test passes now.'},
-  { sortorder: 4, title: 'Find the file that already contains two feature tests. What do they test for? Which test uses JavaScript and which doesnt?'},
-  { sortorder: 5, title: 'The javascript driver can save screenshots, and this feature is used once in the existing tests. Before you look at the screenshot: discuss what you expect it to show! Then find the screenshot and compare.'},
-  { sortorder: 6, title: 'Try out the two lines that are commented out. When you first write tests for javascript it might be useful to look at the console to find problems with your tests.'}
+  { sortorder: 1, description: 'install the app from https://github.com/backend-development/rails-example-testing-for-stars, start it on localhost,  and run the existing tests in the commandline with rails test'},
+  { sortorder: 2, description: 'Write a test to check that a newly created user has a `no_stars` set to zero. This test should immediately pass, the default value was set correctly in the migration that created the users table' },
+  { sortorder: 3, description: 'Write a new method in the user model: a method named `add_star!` that increases the number of stars by one. But: Write the test first. Make sure it fails, then implement the changes in the model and make sure the test passes now.'},
+  { sortorder: 4, description: 'Find the file that already contains two feature tests. What do they test for? Which test uses JavaScript and which doesnt?'},
+  { sortorder: 5, description: 'The javascript driver can save screenshots, and this feature is used once in the existing tests. Before you look at the screenshot: discuss what you expect it to show! Then find the screenshot and compare.'},
+  { sortorder: 6, description: 'Try out the two lines that are commented out. When you first write tests for javascript it might be useful to look at the console to find problems with your tests.'}
 ])
