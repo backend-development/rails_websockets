@@ -1,24 +1,27 @@
-# README
+## Stepstones
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+a ruby on rails 5 example app to learn about websockets.
 
-Things you may want to cover:
+You can find a demo app at https://stepstones.herokuapp.com/
 
-* Ruby version
+### Getting started
 
-* System dependencies
+clone this repository, then
 
-* Configuration
+    bundle   
+    rake db:migrate
+    rake db:seed
+    rails server
 
-* Database creation
+now point your browser at the homepage at http://localhost:3000/
 
-* Database initialization
+To run the tests
 
-* How to run the test suite
+    rails test
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+### What to do
 
-* ...
+1. set up activecable
+2. create a channel
+3. broadcast changes to status to all users in an adventure
