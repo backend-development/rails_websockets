@@ -44,6 +44,7 @@ gem 'jquery-ui-rails'
 gem 'dotenv-rails', :groups => [:development, :test]
 gem 'omniauth'
 gem 'omniauth-oauth2', '~> 1.3.1'
+gem 'omniauth-github'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
