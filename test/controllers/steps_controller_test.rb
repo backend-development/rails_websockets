@@ -35,7 +35,7 @@ class StepsControllerTest < ActionDispatch::IntegrationTest
 
   test "should update step" do
     patch step_url(@step), params: { step: { status_id: @step.status_id, stepstone_id: @step.stepstone_id, user_id: @step.user_id } }
-    assert_redirected_to step_url(@step)
+    assert_redirected_to adventure_stepstones_url(@step.stepstone.adventure)
   end
 
   test "should destroy step" do

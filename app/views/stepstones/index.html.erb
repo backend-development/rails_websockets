@@ -40,7 +40,7 @@
 
 <h2>Status</h2>
 
-<% unless current_user.adventures.include?(@adventure) %>
+<% if user_signed_in? and not current_user.adventures.include?(@adventure) %>
   <%= button_to("start", start_adventure_path(@adventure)) %>
 <% end %>
 
@@ -53,7 +53,11 @@
   </tr>
   <% @stepstones.each_with_index do |stepstone, i| %>
     <tr>
-      <td><%= i+1 %>) </td>
+      <td><%= i+1 %>) 
+
+        <%= render 'change_status', stepstone: stepstone %>
+
+      </td>
       <% @statuses.each do |status| %>
         <td style="width: 15%;"><%= stepstone.steps.where(:status => status).join(', ') %></td>
       <% end %>      

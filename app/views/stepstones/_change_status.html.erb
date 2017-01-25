@@ -1,0 +1,11 @@
+<% if user_signed_in? and current_user.adventures.include?(@adventure) %>
+
+  <% step = stepstone.steps.where(user: current_user).first %>
+
+  <%= form_for step do |f| %>
+    <%= collection_select(:step, :status_id, Status.all, :id, :status, 
+          :selected => step.status_id) %>
+    <%= f.submit 'set' %>
+  <% end %>
+
+<% end %>

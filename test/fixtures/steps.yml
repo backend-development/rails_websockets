@@ -9,3 +9,8 @@ two:
   user: one
   stepstone: two
   status: failed
+
+three:
+  user: one
+  stepstone: three
+  status: not_started

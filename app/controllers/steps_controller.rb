@@ -33,7 +33,7 @@ class StepsController < ApplicationController
   # PATCH/PUT /steps/1
   def update
     if @step.update(step_params)
-      redirect_to @step, notice: 'Step was successfully updated.'
+      redirect_to adventure_stepstones_path(@step.stepstone.adventure), notice: 'Step was successfully updated.'
     else
       render :edit
     end
