@@ -3,8 +3,7 @@ class User < ApplicationRecord
   has_many :stepstones, through: :steps
   has_many :adventures, -> { distinct }, through: :stepstones
 
-  def gravatar_url(email)
-    default_url = "#{root_url}images/guest.png"
+  def self.gravatar_url(email)
     gravatar_id = Digest::MD5.hexdigest(email.downcase)
     "https://gravatar.com/avatar/#{gravatar_id}.jpg?s=48&d=identicon"
   end
