@@ -1,18 +1,16 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 
-
 brigitte = User.create({ provider: 'fhsfull', uid: 3, full_name: 'Brigitte Jellinek', image: 'https://www.gravatar.com/avatar/240fded6e397da0150db90ce28b91ac0.jpg?s=230' })
 s1 = User.create({ id:1, provider: 'github', uid: 1, full_name: 'Alyssa P. Hacker', image: 'https://www.gravatar.com/avatar/00000000000010000001000000100000?s=230&d=identicon&f=y' })
 s2 = User.create({ id:2, provider: 'github', uid: 2, full_name: 'J. Random User', image: 'https://www.gravatar.com/avatar/00006100008010000001000000100000?s=230&d=identicon&f=y' })
-
 
 Status.create([ { status: 'not started', sortorder: 1 },
                 { status: 'working', sortorder: 2 },
                 { status: 'blocked', sortorder: 3  },
                 { status: 'finished', sortorder: 4  },
                 { status: 'failed', sortorder: 5  }
-]);
+])
 
 u8 = Adventure.create({ user: brigitte, title: 'u8 - testing for stars', 
   description: 'work through the example app to learn about testing in rails'})
