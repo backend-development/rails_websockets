@@ -2,5 +2,35 @@
 
 <%= render 'form', adventure: @adventure %>
 
-<%= link_to 'Show', @adventure %> |
-<%= link_to 'Back', adventures_path %>
+
+<p>This Adventure consists of <%= @stepstones.count %> steps:</p>
+
+<% if current_user == @adventure.user %>
+  <%= link_to 'New Stepstone', new_adventure_stepstone_path(@adventure) %> 
+<% end %>
+
+
+<%= form_for( @adventure, url: sort_adventure_path(@adventure), method: :post, remote: true) do |f| %>
+
+  <% if current_user == @adventure.user %>
+    <ol class="sortable">
+  <% else %>
+    <ol>
+  <% end %>
+
+    <% @stepstones.each do |stepstone| %>
+
+      <li>
+        <%= hidden_field_tag('adventure[stepstone_order][]', stepstone.id) %>
+        <%= stepstone.description %>
+        <% if current_user == @adventure.user  %>
+          <%= link_to 'Edit', edit_adventure_stepstone_path(stepstone.adventure, stepstone) %>
+          | <%= link_to 'Destroy', adventure_stepstone_path(@adventure, stepstone), method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% end %>
+      </li>
+
+    <% end %>
+
+  </ol>
+
+<% end %>

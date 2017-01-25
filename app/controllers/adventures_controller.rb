@@ -1,6 +1,6 @@
 class AdventuresController < ApplicationController
-  before_action :set_adventure, only: [:show, :edit, :update, :sort, :start, :destroy]
-  before_action :authenticate_user!, only: [:new, :edit, :update, :create, :destroy]
+  before_action :set_adventure, only: [:show, :edit, :update, :reorder, :sort, :start, :destroy]
+  before_action :authenticate_user!, only: [:new, :edit, :update, :reorder, :sort, :create, :destroy]
   # GET /adventures
   def index
     @adventures = Adventure.all
@@ -17,6 +17,7 @@ class AdventuresController < ApplicationController
 
   # GET /adventures/1/edit
   def edit
+    @stepstones = @adventure.stepstones
   end
 
   # POST /adventures

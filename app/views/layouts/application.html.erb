@@ -22,7 +22,10 @@
             <%= link_to "log in", "/auth/fhs_full/" %> 
             <% if ENV['RAILS_ENV'] == 'development' %>
               |
-              <%= link_to "log in without password", "/auth/testing" %> 
+              log in without password: 
+              <%= link_to "User 1", "/auth/testing?id=1" %>
+              <%= link_to "User 2", "/auth/testing?id=2" %>
+              <%= link_to "User 3", "/auth/testing?id=3" %> 
             <% end %>
           <% end %>
         </nav>

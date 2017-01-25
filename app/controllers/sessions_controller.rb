@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
   def login_for_testing
-    session[:user_id] = User.first.id
+    
+    session[:user_id] = params[:id] or User.first.id
     redirect_to root_path, notice: 'Logged in'
   end
 

@@ -3,46 +3,25 @@
 
 <%= @adventure.description %>
 
-
 <p>This Adventure consists of <%= @stepstones.count %> steps:</p>
-
-
-<%= form_for( @adventure, url: sort_adventure_path(@adventure), method: :post, remote: true) do |f| %>
-
-  <% if current_user == @adventure.user %>
-    <ol class="sortable">
-  <% else %>
-    <ol>
-  <% end %>
-
-    <% @stepstones.each do |stepstone| %>
-
-      <li>
-        <%= hidden_field_tag('adventure[stepstone_order][]', stepstone.id) %>
-        <%= stepstone.description %>
-        <% if current_user == @adventure.user  %>
-          <%= link_to 'Edit', edit_adventure_stepstone_path(stepstone.adventure, stepstone) %>
-          | <%= link_to 'Destroy', adventure_stepstone_path(@adventure, stepstone), method: :delete, data: { confirm: 'Are you sure?' } %>
-        <% end %>
-      </li>
-
-    <% end %>
-
-  </ol>
-
-<% end %>
-
-
-<% if current_user == @adventure.user %>
-  <%= link_to 'New Stepstone', new_adventure_stepstone_path(@adventure) %> 
-<% end %>
-
-
-<h2>Status</h2>
 
 <% if user_signed_in? and not current_user.adventures.include?(@adventure) %>
   <%= button_to("start", start_adventure_path(@adventure)) %>
 <% end %>
+
+<ol>
+  <% @stepstones.each do |stepstone| %>
+    <li>
+      <%= render 'change_status', stepstone: stepstone %>
+            <%= stepstone.description %>
+
+    </li>
+  <% end %>
+</ol>
+
+
+
+<h2>Status</h2>
 
 <table border="1">
   <tr>
@@ -53,11 +32,7 @@
   </tr>
   <% @stepstones.each_with_index do |stepstone, i| %>
     <tr>
-      <td><%= i+1 %>) 
-
-        <%= render 'change_status', stepstone: stepstone %>
-
-      </td>
+      <td><%= i+1 %>)</td>
       <% @statuses.each do |status| %>
         <td style="width: 15%;"><%= stepstone.steps.where(:status => status).join(', ') %></td>
       <% end %>      
