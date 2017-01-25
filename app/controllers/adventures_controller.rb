@@ -51,10 +51,12 @@ class AdventuresController < ApplicationController
   def start
     not_started = Status.where(status:'not started').first
     @adventure.stepstones.each do |s|
-      begin
-        current_user.steps.create({ stepstone: s, status: not_started})
-      rescue
-      end
+      # begin
+      Rails.logger.warn("trying to create step for #{s} and #{current_user}")
+      current_user.steps.create!({ stepstone: s, status: not_started})
+      # rescue
+      #   Rails.logger.warn('got rolled back on that!')
+      # end
     end
     redirect_to adventure_stepstones_path(@adventure)
   end

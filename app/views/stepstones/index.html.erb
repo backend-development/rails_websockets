@@ -34,7 +34,14 @@
     <tr>
       <td><%= i+1 %>)</td>
       <% @statuses.each do |status| %>
-        <td style="width: 15%;"><%= stepstone.steps.where(:status => status).join(', ') %></td>
+        <td style="width: 15%;">
+          <% stepstone.steps.where(:status => status).each do |step| %>
+            <div class="user">
+              <%= image_tag step.user.image %>
+              <%= step.user.full_name %>
+            </div>
+          <% end %>
+        </td>
       <% end %>      
     </tr>
   <% end %>

@@ -76,6 +76,26 @@ footer {
   justify-content: space-between;  
 }
 
+
+.user {
+  width: 65px;
+  height: 85px;
+  text-align:center;
+  font-size: 8px;
+  display: inline-block;
+  border: 1px #ddd solid;
+  line-height: 10px;
+  vertical-align: middle;
+}
+
+.user img{
+  width:60px;
+  height: auto;
+  border-radius: 50%;
+}
+
+
+#main table { width: 100%; }
 nav {
 }
 nav a, h1 a, h2 a {
