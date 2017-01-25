@@ -39,13 +39,26 @@
         <%= yield %>
       </div>
     </section>
+    <section id="chat" class="holder">
+      <div id="output">
+        <p>Chat...</p>
+
+      </div>
+      <div id="input">
+        <span><%= current_user %>: </span>
+        <input name="chat" type="text">
+        <input type="button" value="send">
+      </div>
+    </section>
     <footer>
       <div class="holder">
-        This is an example app for learning about Websockets. See
-        <%= link_to 'the explanation', 'http://backend-development.github.io/rails_websockets.html' %>,
-        <%= link_to 'the demo app', 'https://stepstones.herokuapp.com/' %>
-        and 
-        <%= link_to 'the repository', 'https://github.com/backend-development/rails_websockets' %>
+        <p>
+          This is an example app for learning about Websockets. See
+          <%= link_to 'the explanation', 'http://backend-development.github.io/rails_websockets.html' %>,
+          <%= link_to 'the demo app', 'https://stepstones.herokuapp.com/' %>
+          and 
+          <%= link_to 'the repository', 'https://github.com/backend-development/rails_websockets' %>
+        </p>
       </div>
     </footer>
   </body>

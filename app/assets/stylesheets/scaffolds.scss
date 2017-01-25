@@ -31,8 +31,33 @@ form.edit_step {
   display: inline;
 }
 
-section#main {
+section#chat {
+  background-color: #eef;
   flex: 1;
+}
+section#chat.holder {
+  flex-direction: column !important;
+}
+
+#input {
+  display: flex;
+  flex-direction: row;
+}
+
+#chat input[type=text] {
+  flex: 1;
+}
+
+#output { 
+  height: 150px;
+  overflow: scroll;
+}
+#output p {
+  margin: 0;
+}
+
+section#main {
+  flex: 4;
 }
 header {
   background-color: #DDD;
