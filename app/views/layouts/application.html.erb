@@ -9,14 +9,19 @@
     <%= javascript_include_tag 'application' %>
   </head>
 
-  <body>
+  <%= tag("body", {class:[      
+      "#{controller.controller_name}_controller", 
+      "#{controller.action_name}_action", 
+      "signed_in_#{user_signed_in?}"   
+      ]}, true) %>
+
     <header>
       <div class="holder">
         <nav>
           <%= link_to_unless_current "Home", root_path %>
         </nav>
         <nav>
-          <% if current_user %> 
+          <% if user_signed_in? %> 
             <%= current_user %>
             <%= link_to "log out", logout_path %>
           <% else %>
@@ -42,7 +47,7 @@
         <%= yield %>
       </div>
     </section>
-    <section id="chat" class="holder">
+    <section id="chat" class="holder" style="display:none;">
       <div id="output">
         <p>Chat...</p>
 

@@ -37,7 +37,7 @@
         <td style="width: 15%;">
           <% stepstone.steps.where(:status => status).each do |step| %>
             <div class="user">
-              <%= image_tag step.user.image %>
+              <%= user_avatar step.user %>
               <%= step.user.full_name %>
             </div>
           <% end %>
