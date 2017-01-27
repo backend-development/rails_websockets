@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_many :owned_adventures, class_name: "Adventure", inverse_of: :owner
+
   has_many :steps, dependent: :destroy
   has_many :stepstones, through: :steps
   has_many :adventures, -> { distinct }, through: :stepstones

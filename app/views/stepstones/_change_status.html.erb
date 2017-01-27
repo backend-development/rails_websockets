@@ -1,6 +1,6 @@
-<% if user_signed_in? and current_user.adventures.include?(@adventure) %>
+<% if user_signed_in? and @working %>
 
-  <% step = stepstone.steps.where(user: current_user).first %>
+  <% step = stepstone.steps.group_by(&:user_id)[current_user.id].first %>
 
   <%= form_for step do |f| %>
     <%= collection_select(:step, :status_id, Status.all, :id, :status, 

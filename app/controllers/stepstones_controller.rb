@@ -3,11 +3,11 @@ class StepstonesController < ApplicationController
   before_action :set_stepstone, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:new, :edit, :update, :create, :destroy]
 
-
   # GET /stepstones
   def index
     @statuses = Status.all
     @stepstones = @adventure.stepstones.includes(:steps).includes(:users)
+    @working = current_user.adventures.include?(@adventure) if user_signed_in?
   end
 
   # GET /stepstones/1

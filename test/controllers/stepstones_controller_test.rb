@@ -22,7 +22,7 @@ class StepstonesControllerTest < ActionDispatch::IntegrationTest
 
   describe 'restricted actions as logged in user' do
     setup do
-      get auth_testing_path
+      get auth_testing_path(id: @adventure.owner.id)
     end
 
     test 'should get new' do

@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   get '/auth/:provider/callback', to: 'sessions#create'
   get '/auth/failure',            to: 'sessions#failure'
   get '/logout' => 'sessions#destroy'
-  if Rails.env.development?
+  if Rails.env.development? or Rails.env.test? 
     get '/auth/testing', to: 'sessions#login_for_testing'
   end
 end

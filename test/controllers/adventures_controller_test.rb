@@ -26,7 +26,8 @@ class AdventuresControllerTest < ActionDispatch::IntegrationTest
 
   describe 'restricted actions as logged in user' do
     setup do
-      get auth_testing_path
+      get auth_testing_path(id:users(:three).id)
+      assert_equal flash[:notice], 'Logged in'
     end
 
     test 'should start' do
@@ -50,6 +51,12 @@ class AdventuresControllerTest < ActionDispatch::IntegrationTest
       end
 
       assert_redirected_to adventure_url(Adventure.last)
+    end
+  end
+
+  describe 'restricted actions as owner' do
+    setup do
+      get auth_testing_path(id: @adventure.owner)
     end
 
     test 'should order stepstones' do

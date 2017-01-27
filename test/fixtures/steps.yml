@@ -13,4 +13,4 @@ two:
 three:
   user: one
   stepstone: three
-  status: not_started
+  status: not

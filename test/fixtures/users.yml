@@ -5,8 +5,6 @@ one:
   uid: 3
   fhs_username: bjelline  
   full_name: Brigitte Jellinek
-  first_name: Brigitte
-  last_name: Jellinek
   email: brigitte.jellinek@fh-salzburg.ac.at
   token: MyString
 
@@ -15,18 +13,14 @@ two:
   uid: 1
   fhs_username: fhs1
   full_name: Some Prof
-  first_name: Some
-  last_name: Prof
   email: noone@nowhere.com
   token: MyString
 
-two:
+three:
   provider: fhs
   uid: 2
   fhs_username: fhs2
   full_name: Some Student
-  first_name: Some
-  last_name: Student
   email: nostudent@nowhere.com
   token: MyString
 

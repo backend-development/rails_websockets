@@ -12,7 +12,7 @@
   <%= adventure.description %>
 
 
-  <% if current_user == adventure.user %>
+  <% if current_user == adventure.owner %>
     <%= link_to 'Edit', edit_adventure_path(adventure) %>
     <%= link_to 'Destroy', adventure, method: :delete, data: { confirm: 'Are you sure?' } %>
   <% end %>

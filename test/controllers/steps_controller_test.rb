@@ -16,8 +16,9 @@ class StepsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create step" do
+    u = User.create!
     assert_difference('Step.count') do
-      post steps_url, params: { step: { status_id: @step.status_id, stepstone_id: @step.stepstone_id, user_id: @step.user_id } }
+      post steps_url, params: { step: { status_id: @step.status_id, stepstone_id: @step.stepstone_id, user_id: u.id } }
     end
 
     assert_redirected_to step_url(Step.last)

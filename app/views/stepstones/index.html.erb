@@ -3,46 +3,26 @@
 
 <%= @adventure.description %>
 
-<p>This Adventure consists of <%= @stepstones.count %> steps:</p>
+<p>This Adventure consists of <%= @stepstones.length %> steps:</p>
 
-<% if user_signed_in? and not current_user.adventures.include?(@adventure) %>
+<% if user_signed_in? and not @working %>
   <%= button_to("start", start_adventure_path(@adventure)) %>
 <% end %>
 
-<ol>
-  <% @stepstones.each do |stepstone| %>
-    <li>
-      <%= render 'change_status', stepstone: stepstone %>
-            <%= stepstone.description %>
 
-    </li>
+
+
+<% @stepstones.each_with_index do |stepstone, i| %>
+  <h2><%= i + 1 %>. Step    <%= render 'change_status', stepstone: stepstone %></h2>
+  <div class="step_description">
+    <%= stepstone.description %>
+  </div>
+
+  <% stepstone.steps.group_by(&:status_id).each do |status_id, steps| %>
+    <h3>Status <%= steps.first.status.status %></h3>
+    <%= steps.join(", ") %>
   <% end %>
-</ol>
+<% end %>
 
 
 
-<h2>Status</h2>
-
-<table border="1">
-  <tr>
-    <td style="width: 15%;"></td>
-    <% @statuses.each do |status| %>
-      <th style="width: 15%;"><%= status.status %></th>
-    <% end %>
-  </tr>
-  <% @stepstones.each_with_index do |stepstone, i| %>
-    <tr>
-      <td><%= i+1 %>)</td>
-      <% @statuses.each do |status| %>
-        <td style="width: 15%;">
-          <% stepstone.steps.where(:status => status).each do |step| %>
-            <div class="user">
-              <%= user_avatar step.user %>
-              <%= step.user.full_name %>
-            </div>
-          <% end %>
-        </td>
-      <% end %>      
-    </tr>
-  <% end %>
-</table>

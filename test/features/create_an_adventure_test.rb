@@ -10,19 +10,8 @@ class CreateAnAdventureTest < Capybara::Rails::TestCase
     assert_permission_denied
   end
 
-  test 'user can create empty adventure' do
-    visit auth_testing_path
-    assert_content('Logged in')
-    visit new_adventure_path
-    assert page.status_code
-    fill_in 'Title', with: 'Some Adventure this is'
-    fill_in 'Description', with: 'do this and that and learn something'
-    click_button('Create Adventure')
-    assert_content('Adventure was successfully created.')
-  end
-
-  test 'user cam create empty adventure' do
-    visit auth_testing_path
+  test 'signed in user can create new adventure' do
+    visit auth_testing_path(id:users(:three).id)
     assert_content('Logged in')
     visit new_adventure_path
     fill_in 'Title', with: 'Some Adventure this is'

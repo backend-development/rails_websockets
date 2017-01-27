@@ -3,9 +3,9 @@
 one:
   title: The first adventure
   description: The first adventure is first
-  user: two
+  owner: two
 
 two:
   title: the Second adventure
   description: the 2nd one is even better
-  user: two
+  owner: two
