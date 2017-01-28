@@ -50,7 +50,7 @@ class AdventuresControllerTest < ActionDispatch::IntegrationTest
         }
       end
 
-      assert_redirected_to adventure_url(Adventure.last)
+      assert_redirected_to edit_adventure_url(Adventure.last)
     end
   end
 
@@ -84,7 +84,7 @@ class AdventuresControllerTest < ActionDispatch::IntegrationTest
           title: @adventure.title
         }
       }
-      assert_redirected_to adventure_url(@adventure)
+      assert_redirected_to adventures_url
     end
 
     test 'should destroy adventure' do

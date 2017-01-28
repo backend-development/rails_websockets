@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :steps
+  resources :steps, only: [:create, :update, :destroy]
   resources :adventures do
     resources :stepstones
     member do

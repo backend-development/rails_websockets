@@ -35,7 +35,7 @@ class StepstonesControllerTest < ActionDispatch::IntegrationTest
         post adventure_stepstones_url(@adventure), params: { stepstone: { description: @stepstone.description } }
       end
 
-      assert_redirected_to adventure_stepstones_url(@adventure)
+      assert_redirected_to edit_adventure_url(@adventure)
     end
 
     test 'should show stepstone' do
@@ -51,7 +51,7 @@ class StepstonesControllerTest < ActionDispatch::IntegrationTest
     test 'should update stepstone' do
       patch adventure_stepstone_url(@adventure, @stepstone),
             params: { stepstone: { description: @stepstone.description } }
-      assert_redirected_to adventure_stepstone_url(@adventure, @stepstone)
+      assert_redirected_to edit_adventure_url(@adventure)
     end
 
     test 'should destroy stepstone' do

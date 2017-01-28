@@ -5,7 +5,7 @@ class StepstonesController < ApplicationController
 
   # GET /stepstones
   def index
-    @statuses = Status.all
+    @statuses = Step.statuses
     @stepstones = @adventure.stepstones.includes(:steps).includes(:users)
     @working = current_user.adventures.include?(@adventure) if user_signed_in?
   end
@@ -28,7 +28,7 @@ class StepstonesController < ApplicationController
     @stepstone = @adventure.stepstones.build(stepstone_params)
 
     if @stepstone.save
-      redirect_to adventure_stepstones_url(@adventure), notice: 'Stepstone was successfully created.'
+      redirect_to edit_adventure_url(@adventure), notice: 'Stepstone was successfully created.'
     else
       render :new
     end
@@ -37,7 +37,7 @@ class StepstonesController < ApplicationController
   # PATCH/PUT /stepstones/1
   def update
     if @stepstone.update(stepstone_params)
-      redirect_to adventure_stepstone_url(@adventure, @stepstone), notice: 'Stepstone was successfully updated.'
+      redirect_to edit_adventure_url(@adventure), notice: 'Stepstone was successfully updated.'
     else
       render :edit
     end

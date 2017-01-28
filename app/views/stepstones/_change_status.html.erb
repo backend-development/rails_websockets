@@ -3,8 +3,11 @@
   <% step = stepstone.steps.group_by(&:user_id)[current_user.id].first %>
 
   <%= form_for step do |f| %>
-    <%= collection_select(:step, :status_id, Status.all, :id, :status, 
-          :selected => step.status_id) %>
+    <%= f.select(
+         :status, 
+         options_for_select(
+         Step.statuses, 
+         step.status)) %>
     <%= f.submit 'set' %>
   <% end %>
 

@@ -1,5 +1,8 @@
-
 <h1><%= @adventure %></h1>
+
+<% if current_user == @adventure.owner %>
+<%= link_to "edit", edit_adventure_path(@adventure) %>
+<% end %>
 
 <%= @adventure.description %>
 
@@ -9,17 +12,14 @@
   <%= button_to("start", start_adventure_path(@adventure)) %>
 <% end %>
 
-
-
-
 <% @stepstones.each_with_index do |stepstone, i| %>
   <h2><%= i + 1 %>. Step    <%= render 'change_status', stepstone: stepstone %></h2>
   <div class="step_description">
     <%= stepstone.description %>
   </div>
 
-  <% stepstone.steps.group_by(&:status_id).each do |status_id, steps| %>
-    <h3>Status <%= steps.first.status.status %></h3>
+  <% stepstone.steps.group_by(&:status).each do |status, steps| %>
+    <h3>Status <%= status %></h3>
     <%= steps.join(", ") %>
   <% end %>
 <% end %>

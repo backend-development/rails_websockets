@@ -26,7 +26,7 @@ class AdventuresController < ApplicationController
     @adventure.owner = current_user
 
     if @adventure.save
-      redirect_to @adventure, notice: 'Adventure was successfully created.'
+      redirect_to edit_adventure_path(@adventure), notice: 'Adventure was successfully created.'
     else
       render :new
     end
@@ -48,11 +48,10 @@ class AdventuresController < ApplicationController
 
   # PATCH/PUT /adventures/1/start
   def start
-    not_started = Status.where(status: 'not started').first
     @adventure.stepstones.each do |s|
       begin
         Rails.logger.warn("trying to create step for #{s} and #{current_user}")
-        current_user.steps.create!(stepstone: s, status: not_started)
+        current_user.steps.create!(stepstone: s, status: 'not started')
       rescue
         Rails.logger.warn('got rolled back on step!')
       end
@@ -63,7 +62,7 @@ class AdventuresController < ApplicationController
   # PATCH/PUT /adventures/1
   def update
     if @adventure.update(adventure_params)
-      redirect_to @adventure, notice: 'Adventure was successfully updated.'
+      redirect_to adventures_url, notice: 'Adventure was successfully updated.'
     else
       render :edit
     end

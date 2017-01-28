@@ -5,37 +5,37 @@ class StepsControllerTest < ActionDispatch::IntegrationTest
     @step = steps(:one)
   end
 
-  test "should get index" do
-    get steps_url
-    assert_response :success
-  end
+  # test "should get index" do
+  #   get steps_url
+  #   assert_response :success
+  # end
 
-  test "should get new" do
-    get new_step_url
-    assert_response :success
-  end
+  # test "should get new" do
+  #   get new_step_url
+  #   assert_response :success
+  # end
 
   test "should create step" do
     u = User.create!
     assert_difference('Step.count') do
-      post steps_url, params: { step: { status_id: @step.status_id, stepstone_id: @step.stepstone_id, user_id: u.id } }
+      post steps_url, params: { step: { status: @step.status, stepstone_id: @step.stepstone_id, user_id: u.id } }
     end
 
     assert_redirected_to step_url(Step.last)
   end
 
-  test "should show step" do
-    get step_url(@step)
-    assert_response :success
-  end
+  # test "should show step" do
+  #   get step_url(@step)
+  #   assert_response :success
+  # end
 
-  test "should get edit" do
-    get edit_step_url(@step)
-    assert_response :success
-  end
+  # test "should get edit" do
+  #   get edit_step_url(@step)
+  #   assert_response :success
+  # end
 
   test "should update step" do
-    patch step_url(@step), params: { step: { status_id: @step.status_id, stepstone_id: @step.stepstone_id, user_id: @step.user_id } }
+    patch step_url(@step), params: { step: { status: @step.status, stepstone_id: @step.stepstone_id, user_id: @step.user_id } }
     assert_redirected_to adventure_stepstones_url(@step.stepstone.adventure)
   end
 
