@@ -19,8 +19,8 @@
   </div>
 
   <% stepstone.steps.group_by(&:status).each do |status, steps| %>
-    <% unless 'not started' == status %> 
-      <% steps.each do |st| %>
+    <% steps.each do |st| %>
+      <% if 'not started' != status or current_user == st.user %> 
         <div class="user <%= status %>">
           <%= user_avatar( st.user ) %> 
           <%= st.user.full_name %>
@@ -30,6 +30,8 @@
         <% if st.user == current_user %>
            <%= render 'change_status', stepstone: stepstone %>
         <% end %>
+
+
       <% end %>  
     <% end %>  
   <% end %>
