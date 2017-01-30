@@ -13,16 +13,31 @@
 <% end %>
 
 <% @stepstones.each_with_index do |stepstone, i| %>
-  <h2><%= i + 1 %>. Step    <%= render 'change_status', stepstone: stepstone %></h2>
+  <h2><%= i + 1 %>. Step   </h2>
   <div class="step_description">
     <%= stepstone.description %>
   </div>
 
   <% stepstone.steps.group_by(&:status).each do |status, steps| %>
-    <h3>Status <%= status %></h3>
-    <%= steps.join(", ") %>
+    <% unless 'not started' == status %> 
+      <% steps.each do |st| %>
+        <div class="user <%= status %>">
+          <%= user_avatar( st.user ) %> 
+          <%= st.user.full_name %>
+          (<%= status %>)
+        </div>
+
+        <% if st.user == current_user %>
+           <%= render 'change_status', stepstone: stepstone %>
+        <% end %>
+      <% end %>  
+    <% end %>  
   <% end %>
 <% end %>
 
-
+<svg height="0">
+  <clipPath id="circlemask" >
+    <circle cx="30" cy="30" r="30" id="circle"/>
+  </clipPath>
+</svg>
 

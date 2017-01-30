@@ -78,20 +78,38 @@ footer {
 
 
 .user {
-  width: 65px;
+  width: 70px;
   height: 85px;
   text-align:center;
   font-size: 8px;
   display: inline-block;
-  border: 1px #ddd solid;
   line-height: 10px;
   vertical-align: middle;
 }
 
+.user.working {
+    background-image: radial-gradient(circle  closest-side at 35px 35px, #030303 0%, #FFFFFF 100%);
+}
+
+.user.blocked {
+  background-image: radial-gradient(circle  closest-side at 35px 35px, #FF0000 0%, #FFFFFF 100%);
+  
+}
+.user.finished {
+  background-image: radial-gradient(circle  closest-side at 35px 35px, #004400 0%, #FFFFFF 100%);
+  
+}
+
+.user span{
+  display: block;
+  width:60px;
+  height:60px;
+  overflow:hidden;
+  margin: 0 auto;
+}
 .user img{
   width:60px;
-  height: auto;
-  border-radius: 50%;
+  clip-path: url('#circlemask')
 }
 
 .step_description {
