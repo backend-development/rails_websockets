@@ -18,12 +18,15 @@
     <header>
       <div class="holder">
         <nav>
-          <%= link_to_unless_current "Home", root_path %>
+          <%= link_to root_path, class: 'nodecoration' do %>
+            <%= inline_svg 'stepstones.svg', class: 'logo' %>
+          <% end %>
+          <%= link_to "Stepstones", root_path %>
         </nav>
         <nav>
           <% if user_signed_in? %> 
-            <%= current_user %>
-            <%= link_to "log out", logout_path %>
+            <%= link_to "log out", logout_path %>          
+            <div class="user"><%= user_avatar current_user %><%= current_user %></div>
           <% else %>
             log in with
             <%= link_to "github", "/auth/github/" %> |
@@ -69,5 +72,10 @@
         </p>
       </div>
     </footer>
+    <svg height="0">
+      <clipPath id="circlemask" >
+        <circle cx="30" cy="30" r="30" id="circle"/>
+      </clipPath>
+    </svg>
   </body>
 </html>

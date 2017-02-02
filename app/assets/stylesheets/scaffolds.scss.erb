@@ -1,3 +1,7 @@
+body, nav, footer, .holder {
+  box-sizing: border-box;
+}
+
 body {
   background-color: #fff;
   color: #333;
@@ -10,6 +14,7 @@ body {
   justify-content: space-between;
   align-items: stretch;
   min-height: 100vh;
+  box-sizing: border-box;
 }
 
 @keyframes flash-animation {  
@@ -56,6 +61,14 @@ section#chat.holder {
   margin: 0;
 }
 
+.logo {
+  height: 85px;
+}
+
+svg:hover .step_color {
+  fill:blue;
+}
+
 section#main {
   flex: 4;
 }
@@ -72,7 +85,7 @@ footer {
   padding: 20px;
   margin: 0px auto; 
   display: flex;
-  flex-direction: rows;
+  flex-direction: row;
   justify-content: space-between;  
 }
 
@@ -126,6 +139,9 @@ nav a, h1 a, h2 a {
 nav a:hover, h1 a:hover, h2 a:hover {
   text-decoration: underline;
 }
+nav a.nodecoration:hover, h1 a.nodecoration:hover, h2 a.nodecoration:hover {
+  text-decoration: none;
+}
 
 p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
@@ -148,8 +164,7 @@ a {
   }
 
   &:hover {
-    color: #fff;
-    background-color: #000;
+    color: blue;
   }
 }
 
