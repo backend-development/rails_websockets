@@ -19,7 +19,7 @@
 </p>
 
 <% @stepstones.each_with_index do |stepstone, i| %>
-  <h2><%= i + 1 %>. Step   </h2>
+  <h2 class="<%= @my_statuses[i] %>"><%= i + 1 %>. Step   </h2>
   <article>
     <div class="step_description">
       <%= stepstone.description %>
@@ -28,7 +28,7 @@
     <div class="step_status">
       <% stepstone.steps.group_by(&:status).each do |status, steps| %>
         <% steps.each do |st| %>
-          <% if not( st.not_started? ) or current_user == st.user %> 
+          <% if not st.not_started?  %> 
             <div class="user <%= status %>">
               <%= user_at_step( st ) %> 
               <%= st.user.full_name %>
