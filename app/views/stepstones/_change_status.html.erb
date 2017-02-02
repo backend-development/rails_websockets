@@ -1,14 +1,27 @@
-<% if user_signed_in? and @working %>
+<% if user_signed_in? %>
 
-  <% step = stepstone.steps.group_by(&:user_id)[current_user.id].first %>
+  <% step = stepstone.step_of(current_user) %>
 
-  <%= form_for step do |f| %>
-    <%= f.select(
-         :status, 
-         options_for_select(
-         Step.statuses, 
-         step.status)) %>
-    <%= f.submit 'set' %>
+  <% if step.nil? %>
+
+    <%= form_for Step.new(user:current_user, stepstone:stepstone, status:'working') do |f| %>
+      <%= f.hidden_field(:user_id) %>
+      <%= f.hidden_field(:stepstone_id) %>
+      <%= f.hidden_field(:status) %>
+      <%= f.submit "start working on #{no}. step" %>
+    <% end %>
+
+  <% else %>
+
+    <%= form_for step do |f| %>
+      <%= f.select(
+           :status, 
+           options_for_select(
+           Step.statuses, 
+           step.status)) %>
+      <%= f.submit 'set' %>
+    <% end %>
+
   <% end %>
 
 <% end %>

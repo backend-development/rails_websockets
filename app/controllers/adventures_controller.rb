@@ -1,6 +1,6 @@
 class AdventuresController < ApplicationController
   before_action :set_adventure,      only: [:show, :edit, :update, :reorder, :sort, :start, :destroy]
-  before_action :authenticate_user!, only: [ :new, :edit, :update, :reorder, :sort, :create, :destroy]
+  before_action :authenticate_user!, only: [:new, :edit, :update, :reorder, :sort, :create, :destroy]
   # GET /adventures
   def index
     @adventures = Adventure.all
@@ -8,6 +8,9 @@ class AdventuresController < ApplicationController
 
   # GET /adventures/1
   def show
+    @statuses = Step.statuses
+    @my_statuses = @adventure.statuses_of(current_user)
+    @stepstones = @adventure.full_stepstones
   end
 
   # GET /adventures/new
@@ -36,12 +39,7 @@ class AdventuresController < ApplicationController
   def sort
     if current_user == @adventure.owner
       p = params.require(:adventure).permit(stepstone_order: [])
-      new_sortorder = 1
-      p[:stepstone_order].each do |s|
-        stepstone = @adventure.stepstones.find(s)
-        stepstone.update!(sortorder: new_sortorder)
-        new_sortorder += 1
-      end
+      @adventure.order_stepstones!(p[:stepstone_order])
     end
     head :ok
   end
@@ -56,7 +54,7 @@ class AdventuresController < ApplicationController
         Rails.logger.warn('got rolled back on step!')
       end
     end
-    redirect_to adventure_stepstones_path(@adventure)
+    redirect_to adventure_path(@adventure)
   end
 
   # PATCH/PUT /adventures/1

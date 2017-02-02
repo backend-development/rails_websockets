@@ -24,7 +24,7 @@ class StepsController < ApplicationController
     @step = Step.new(step_params)
 
     if @step.save
-      redirect_to @step, notice: 'Step was successfully created.'
+      redirect_to adventure_path(@step.stepstone.adventure), notice: 'You started working.'
     else
       render :new
     end
@@ -33,7 +33,7 @@ class StepsController < ApplicationController
   # PATCH/PUT /steps/1
   def update
     if @step.update(step_params)
-      redirect_to adventure_stepstones_path(@step.stepstone.adventure), notice: 'Step was successfully updated.'
+      redirect_to adventure_path(@step.stepstone.adventure), notice: 'Step was successfully updated.'
     else
       render :edit
     end

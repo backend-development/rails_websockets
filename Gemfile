@@ -66,6 +66,7 @@ group :test do
   gem 'capybara-webkit'
   gem 'rails-controller-testing'
   gem 'transactional_capybara'
+  gem 'm'
 end
 
 group :development do

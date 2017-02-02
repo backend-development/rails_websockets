@@ -16,7 +16,13 @@ three:
   sortorder: 3
 
 four:
-  description: step b
+  description: step a
   adventure: two
   sortorder: 1
+
+five:
+  description: step b
+  adventure: two
+  sortorder: 2
+
 

@@ -1,17 +1,48 @@
-<p>
-  <strong>Title:</strong>
-  <%= @adventure.title %>
-</p>
+<h1><%= @adventure %></h1>
+
+<% if current_user == @adventure.owner %>
+  <p><%= link_to "edit", edit_adventure_path(@adventure) %></p>
+<% end %>
+
+<%= @adventure.description %>
+
+<p>This Adventure consists of <%= @stepstones.length %> steps.</p>  
 
 <p>
-  <strong>Description:</strong>
-  <%= @adventure.description %>
+  <% if not user_signed_in? %>
+    Log in to start this adventure!
+  <% elsif @my_statuses.empty? %>
+    You have not started working on this adventure.
+  <% else # already working on this %>
+    You are working on this adventure, <%= describe_status( @my_statuses ) %>.
+  <% end %>
 </p>
 
-<p>
-  <strong>Owner:</strong>
-  <%= @adventure.owner %>
-</p>
+<% @stepstones.each_with_index do |stepstone, i| %>
+  <h2><%= i + 1 %>. Step   </h2>
+  <div class="step_description">
+    <%= stepstone.description %>
+  </div>
 
-<%= link_to 'Edit', edit_adventure_path(@adventure) %> |
-<%= link_to 'Back', adventures_path %>
+  <% stepstone.steps.group_by(&:status).each do |status, steps| %>
+    <% steps.each do |st| %>
+      <% if 'not started' != status or current_user == st.user %> 
+        <div class="user <%= status %>">
+          <%= user_avatar( st.user ) %> 
+          <%= st.user.full_name %>
+          (<%= status %>)
+        </div>
+      <% end %>  
+    <% end %>  
+  <% end %>
+
+  <p><%= render 'stepstones/change_status', stepstone: stepstone, no: i+1 %></p>
+
+<% end %>
+
+<svg height="0">
+  <clipPath id="circlemask" >
+    <circle cx="30" cy="30" r="30" id="circle"/>
+  </clipPath>
+</svg>
+

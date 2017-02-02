@@ -8,7 +8,7 @@
 
 <% @adventures.each do |adventure| %>
 
-  <h2><%=  link_to adventure.title, adventure_stepstones_path(adventure)  %></h2>
+  <h2><%=  link_to adventure.title, adventure_path(adventure)  %></h2>
   <%= adventure.description %>
 
 

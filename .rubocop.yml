@@ -17,6 +17,7 @@ Style/ClassVars:
   Enabled: false
 
 AllCops:
+  TargetRubyVersion: 2.3
   Exclude:
     - 'config/environments/**'
     - 'config/**'

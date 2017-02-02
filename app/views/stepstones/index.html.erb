@@ -1,16 +1,4 @@
-<h1><%= @adventure %></h1>
-
-<% if current_user == @adventure.owner %>
-<%= link_to "edit", edit_adventure_path(@adventure) %>
-<% end %>
-
-<%= @adventure.description %>
-
-<p>This Adventure consists of <%= @stepstones.length %> steps:</p>
-
-<% if user_signed_in? and not @working %>
-  <%= button_to("start", start_adventure_path(@adventure)) %>
-<% end %>
+<h1>List of Stepstones in <%= @adventure %></h1>
 
 <% @stepstones.each_with_index do |stepstone, i| %>
   <h2><%= i + 1 %>. Step   </h2>
@@ -18,28 +6,4 @@
     <%= stepstone.description %>
   </div>
 
-  <% stepstone.steps.group_by(&:status).each do |status, steps| %>
-    <% steps.each do |st| %>
-      <% if 'not started' != status or current_user == st.user %> 
-        <div class="user <%= status %>">
-          <%= user_avatar( st.user ) %> 
-          <%= st.user.full_name %>
-          (<%= status %>)
-        </div>
-
-        <% if st.user == current_user %>
-           <%= render 'change_status', stepstone: stepstone %>
-        <% end %>
-
-
-      <% end %>  
-    <% end %>  
-  <% end %>
 <% end %>
-
-<svg height="0">
-  <clipPath id="circlemask" >
-    <circle cx="30" cy="30" r="30" id="circle"/>
-  </clipPath>
-</svg>
-

@@ -32,7 +32,7 @@ class AdventuresControllerTest < ActionDispatch::IntegrationTest
 
     test 'should start' do
       post start_adventure_url(@adventure)
-      assert_redirected_to adventure_stepstones_url(@adventure)
+      assert_redirected_to adventure_url(@adventure)
     end
 
     test 'should get new' do
