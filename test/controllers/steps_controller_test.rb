@@ -18,7 +18,7 @@ class StepsControllerTest < ActionDispatch::IntegrationTest
   test "should create step" do
     u = User.create!
     assert_difference('Step.count') do
-      post steps_url, params: { step: { status: @step.status, stepstone_id: @step.stepstone_id, user_id: u.id } }
+      post steps_url, params: { step: { aasm_state: @step.aasm_state, stepstone_id: @step.stepstone_id, user_id: u.id } }
     end
 
     assert_redirected_to adventure_url(Step.last.stepstone.adventure)
@@ -35,7 +35,7 @@ class StepsControllerTest < ActionDispatch::IntegrationTest
   # end
 
   test "should update step" do
-    patch step_url(@step), params: { step: { status: @step.status, stepstone_id: @step.stepstone_id, user_id: @step.user_id } }
+    patch step_url(@step), params: { step: { aasm_state: @step.aasm_state, stepstone_id: @step.stepstone_id, user_id: @step.user_id } }
     assert_redirected_to adventure_url(@step.stepstone.adventure)
   end
 

@@ -4,10 +4,10 @@
 
   <% if step.nil? %>
 
-    <%= form_for Step.new(user:current_user, stepstone:stepstone, status:'working') do |f| %>
+    <%= form_for Step.new(user:current_user, stepstone:stepstone, aasm_state:'working') do |f| %>
       <%= f.hidden_field(:user_id) %>
       <%= f.hidden_field(:stepstone_id) %>
-      <%= f.hidden_field(:status) %>
+      <%= f.hidden_field(:aasm_state) %>
       <%= f.submit "start working on #{no}. step" %>
     <% end %>
 
@@ -15,10 +15,10 @@
 
     <%= form_for step do |f| %>
       <%= f.select(
-           :status, 
+           :aasm_state, 
            options_for_select(
            Step.statuses, 
-           step.status)) %>
+           step.aasm_state)) %>
       <%= f.submit 'set' %>
     <% end %>
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170127214657) do
+ActiveRecord::Schema.define(version: 20170202104530) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20170127214657) do
     t.integer  "stepstone_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
-    t.string   "status"
+    t.string   "aasm_state"
     t.index ["stepstone_id"], name: "index_steps_on_stepstone_id", using: :btree
     t.index ["user_id", "stepstone_id"], name: "index_steps_on_user_id_and_stepstone_id", unique: true, using: :btree
     t.index ["user_id"], name: "index_steps_on_user_id", using: :btree

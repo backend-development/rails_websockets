@@ -3,14 +3,14 @@
 one:
   user: one
   stepstone: one
-  status: finished
+  aasm_state: finished
 
 two:
   user: one
   stepstone: two
-  status: working
+  aasm_state: working
 
 three:
   user: one
   stepstone: three
-  status: not started
+  aasm_state: not_started

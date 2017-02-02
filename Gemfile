@@ -15,6 +15,7 @@ gem 'rails', '~> 5.0.1'
 # ----------------- database ----------------
 # Use postgres as the database for Active Record
 gem 'pg'
+gem 'aasm'
 
 # ----------------- webserver ----------------
 # Use Puma as the app server

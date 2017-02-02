@@ -27,7 +27,7 @@ class Adventure < ApplicationRecord
   def statuses_of(user)
     return nil if user.nil? or user.id.nil?
     sql = <<~SQL
-      SELECT sortorder, status
+      SELECT sortorder, aasm_state AS status
       FROM stepstones
       LEFT JOIN steps
       ON (stepstones.id = steps.stepstone_id)

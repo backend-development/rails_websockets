@@ -13,7 +13,7 @@ class AdventureTest < ActiveSupport::TestCase
     end
 
     test 'correct status map' do
-      assert_equal ['finished', 'working', 'not started'], @adventure.statuses_of(@user)
+      assert_equal ['finished', 'working', 'not_started'], @adventure.statuses_of(@user)
     end
   end
 end
