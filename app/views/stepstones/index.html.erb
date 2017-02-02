@@ -1,9 +1,0 @@
-<h1>List of Stepstones in <%= @adventure %></h1>
-
-<% @stepstones.each_with_index do |stepstone, i| %>
-  <h2><%= i + 1 %>. Step   </h2>
-  <div class="step_description">
-    <%= stepstone.description %>
-  </div>
-
-<% end %>

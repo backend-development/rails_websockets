@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
   resources :steps, only: [:create, :update, :destroy]
   resources :adventures do
-    resources :stepstones
+    resources :stepstones, only: [:new, :create, :edit, :update, :destroy]
     member do
       post 'sort'
-      post 'start'
     end
   end
 

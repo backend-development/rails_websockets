@@ -44,19 +44,6 @@ class AdventuresController < ApplicationController
     head :ok
   end
 
-  # PATCH/PUT /adventures/1/start
-  def start
-    @adventure.stepstones.each do |s|
-      begin
-        Rails.logger.warn("trying to create step for #{s} and #{current_user}")
-        current_user.steps.create!(stepstone: s, status: 'not started')
-      rescue
-        Rails.logger.warn('got rolled back on step!')
-      end
-    end
-    redirect_to adventure_path(@adventure)
-  end
-
   # PATCH/PUT /adventures/1
   def update
     if @adventure.update(adventure_params)

@@ -30,11 +30,6 @@ class AdventuresControllerTest < ActionDispatch::IntegrationTest
       assert_equal flash[:notice], 'Logged in'
     end
 
-    test 'should start' do
-      post start_adventure_url(@adventure)
-      assert_redirected_to adventure_url(@adventure)
-    end
-
     test 'should get new' do
       get new_adventure_url
       assert_response :success

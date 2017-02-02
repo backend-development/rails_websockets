@@ -1,18 +1,7 @@
 class StepstonesController < ApplicationController
   before_action :set_adventure
-  before_action :set_stepstone, only: [:show, :edit, :update, :destroy]
+  before_action :set_stepstone, only: [:edit, :update, :destroy]
   before_action :authenticate_user!, only: [:new, :edit, :update, :create, :destroy]
-
-  # GET /stepstones
-  def index
-    @statuses = Step.statuses
-    @stepstones = @adventure.stepstones.includes(:steps).includes(:users)
-    @working = current_user.adventures.include?(@adventure) if user_signed_in?
-  end
-
-  # GET /stepstones/1
-  def show
-  end
 
   # GET /stepstones/new
   def new
@@ -46,7 +35,7 @@ class StepstonesController < ApplicationController
   # DELETE /stepstones/1
   def destroy
     @stepstone.destroy
-    redirect_to adventure_stepstones_url(@adventure), notice: 'Stepstone was successfully destroyed.'
+    redirect_to adventure_url(@adventure), notice: 'Stepstone was successfully destroyed.'
   end
 
   private

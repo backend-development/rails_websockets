@@ -17,8 +17,8 @@ class Adventure < ApplicationRecord
   # set sortorder of all stepstones, zero-based!
   def order_stepstones!(stepstone_order)
     new_sortorder = 0
-    stepstone_order.each do |s|
-      s = stepstones.find(s)
+    stepstone_order.each do |stepstone_id|
+      s = stepstones.find(stepstone_id)
       s.update!(sortorder: new_sortorder)
       new_sortorder += 1
     end

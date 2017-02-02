@@ -1,23 +1,5 @@
 class StepsController < ApplicationController
-  before_action :set_step, only: [:show, :edit, :update, :destroy]
-
-  # GET /steps
-  def index
-    @steps = Step.all
-  end
-
-  # GET /steps/1
-  def show
-  end
-
-  # GET /steps/new
-  def new
-    @step = Step.new
-  end
-
-  # GET /steps/1/edit
-  def edit
-  end
+  before_action :set_step, only: [:update, :destroy]
 
   # POST /steps
   def create
@@ -46,13 +28,13 @@ class StepsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_step
-      @step = Step.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def step_params
-      params.require(:step).permit(:user_id, :stepstone_id, :aasm_state, :status)
-    end
+  def set_step
+    @step = Step.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def step_params
+    params.require(:step).permit(:user_id, :stepstone_id, :aasm_state, :status)
+  end
 end

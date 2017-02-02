@@ -6,13 +6,6 @@ class StepstonesControllerTest < ActionDispatch::IntegrationTest
     @stepstone = stepstones(:one)
   end
 
-  describe 'public actions' do
-    test 'should get index' do
-      get adventure_stepstones_url(@adventure)
-      assert_response :success
-    end
-  end
-
   describe 'restricted actions as a guest' do
     test 'should not get new' do
       get new_adventure_stepstone_url(@adventure)
@@ -38,11 +31,6 @@ class StepstonesControllerTest < ActionDispatch::IntegrationTest
       assert_redirected_to edit_adventure_url(@adventure)
     end
 
-    test 'should show stepstone' do
-      get adventure_stepstone_url(@adventure, @stepstone)
-      assert_response :success
-    end
-
     test 'should get edit' do
       get edit_adventure_stepstone_url(@adventure, @stepstone)
       assert_response :success
@@ -59,7 +47,7 @@ class StepstonesControllerTest < ActionDispatch::IntegrationTest
         delete adventure_stepstone_url(@adventure, @stepstone)
       end
 
-      assert_redirected_to adventure_stepstones_url(@adventure)
+      assert_redirected_to adventure_url(@adventure)
     end
   end
 end

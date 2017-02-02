@@ -19,7 +19,9 @@
 </p>
 
 <% @stepstones.each_with_index do |stepstone, i| %>
-  <h2 class="<%= @my_statuses[i] %>"><%= i + 1 %>. Step   </h2>
+  <h2 class="<%= if @my_statuses.nil? then 'not_started' else @my_statuses[i] end %>">
+    <%= i + 1 %>. Step   
+  </h2>
   <article>
     <div class="step_description">
       <%= stepstone.description %>
