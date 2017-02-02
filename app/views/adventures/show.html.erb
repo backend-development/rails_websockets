@@ -20,23 +20,28 @@
 
 <% @stepstones.each_with_index do |stepstone, i| %>
   <h2><%= i + 1 %>. Step   </h2>
-  <div class="step_description">
-    <%= stepstone.description %>
-  </div>
+  <article>
+    <div class="step_description">
+      <%= stepstone.description %>
+    </div>
 
-  <% stepstone.steps.group_by(&:status).each do |status, steps| %>
-    <% steps.each do |st| %>
-      <% if not( st.not_started? ) or current_user == st.user %> 
-        <div class="user <%= status %>">
-          <%= user_at_step( st ) %> 
-          <%= st.user.full_name %>
-          (<%= status %>)
-        </div>
-      <% end %>  
-    <% end %>  
-  <% end %>
+    <div class="step_status">
+      <% stepstone.steps.group_by(&:status).each do |status, steps| %>
+        <% steps.each do |st| %>
+          <% if not( st.not_started? ) or current_user == st.user %> 
+            <div class="user <%= status %>">
+              <%= user_at_step( st ) %> 
+              <%= st.user.full_name %>
+              (<%= status %>)
+            </div>
+          <% end %>  
+        <% end %>  
+      <% end %>
+      <p><%= render 'stepstones/change_status', stepstone: stepstone, no: i+1 %></p>
 
-  <p><%= render 'stepstones/change_status', stepstone: stepstone, no: i+1 %></p>
+    </div>
+  </article>
+
 
 <% end %>
 
