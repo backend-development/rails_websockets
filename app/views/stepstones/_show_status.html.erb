@@ -1,0 +1,11 @@
+<% stepstone.steps.group_by(&:status).each do |status, steps| %>
+  <% steps.each do |st| %>
+    <% if not st.not_started?  %> 
+      <div class="user <%= status %>">
+        <%= user_at_step( st ) %> 
+        <%= st.user.full_name %>
+        (<%= status %>)
+      </div>
+    <% end %>  
+  <% end %>  
+<% end %>

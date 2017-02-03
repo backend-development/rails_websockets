@@ -2,7 +2,7 @@
   current_step = current_step(@my_statuses)
 %>
 
-<h1>
+<h1 data-adventure="<%= @adventure.id %>">
   <span class="number"><%= @adventure.prefix  %></span>
   <%= @adventure %>
 </h1>
@@ -42,17 +42,8 @@
       </div>
 
       <div id="step_<%= i %>_show_status" class="step_show_status">
-        <% stepstone.steps.group_by(&:status).each do |status, steps| %>
-          <% steps.each do |st| %>
-            <% if not st.not_started?  %> 
-              <div class="user <%= status %>">
-                <%= user_at_step( st ) %> 
-                <%= st.user.full_name %>
-                (<%= status %>)
-              </div>
-            <% end %>  
-          <% end %>  
-        <% end %>
+        <%= render 'stepstones/show_status', stepstone: stepstone, i: i %>
+
 
       </div>
     </article>
