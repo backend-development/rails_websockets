@@ -10,7 +10,10 @@ class AdventuresController < ApplicationController
   def show
     @statuses = Step.statuses
     @my_statuses = @adventure.statuses_of(current_user)
+    @current_step = helpers.current_step(@my_statuses)
+    @describe_status = helpers.describe_status(@my_statuses)
     @stepstones = @adventure.full_stepstones
+    @classes_for_statuses = helpers.classes_for_statuses(@current_step, @my_statuses, @stepstones.length)
   end
 
   # GET /adventures/new

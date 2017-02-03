@@ -1,7 +1,3 @@
-<%
-  current_step = current_step(@my_statuses)
-%>
-
 <h1 data-adventure="<%= @adventure.id %>">
   <span class="number"><%= @adventure.prefix  %></span>
   <%= @adventure %>
@@ -17,20 +13,18 @@
 
 <p>This Adventure consists of <%= @stepstones.length %> steps.</p>  
 
-<p>
+<p id="status">
   <% if not user_signed_in? %>
     Log in to start this adventure!
   <% elsif @my_statuses.empty? %>
     You have not started working on this adventure.
-  <% elsif current_step == @my_statuses.length %>
-    Congratulations, you are <%= describe_status( @my_statuses ) %>
   <% else # already working on this %>
-    You are working on this adventure, <%= describe_status( @my_statuses ) %>.
+    You are <%= @describe_status %>.
   <% end %>
 </p>
 
 <% @stepstones.each_with_index do |stepstone, i| %>
-  <div  class="<%= class_for_step(i,current_step, @my_statuses) %>">
+  <div id="step_<%= i %>">
     <h2>
       <span class="number"><%= (i + 1).ordinalize %>.</span> Step   
     </h2>
@@ -50,4 +44,8 @@
   </div>
 
 <% end %>
+
+<script>
+display_status(<%= raw @classes_for_statuses.to_json %>);
+</script>
 

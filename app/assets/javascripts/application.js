@@ -15,4 +15,11 @@
 //= require jquery-ui/widgets/sortable
 //                       turbolinks deactivated for now//= require turbolinks
 //= require_tree .
+//= require_self
 
+
+function display_status(array_of_classes) {
+  for (i in array_of_classes) {
+    $('#step_'+i).attr('class', array_of_classes[i]);
+  }
+}

@@ -15,9 +15,9 @@ class WorkThroughAnAdventureTest < Capybara::Rails::TestCase
     visit auth_testing_path(id: users(:three).id)
     visit adventure_path(adventures(:one))
     assert_content('This Adventure consists of 3 steps')
-    within('.step_0') do
+    within('#step_0') do
       click_button('Working')
     end
-    assert_content('You are working on this adventure')
+    assert_content('You are currently working on step 1.')
   end
 end

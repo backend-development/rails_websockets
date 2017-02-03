@@ -1,6 +1,6 @@
 module AdventureHelper
   def describe_status(statuses)
-    return nil if statuses.empty?
+    return nil if statuses.nil? or statuses.empty?
 
     # first scan: find firest step that is not started or that we are working on
     statuses.each_with_index do |s, i|
@@ -49,4 +49,26 @@ module AdventureHelper
 
     classes.join(' ')
   end
+
+  def classes_for_statuses(current_step, statuses, max)
+    arr = []
+    (0..(max - 1)).each do |i|
+      classes = ["step_#{i}"]
+      classes.push(statuses&[i] || 'not_started')
+
+      if current_step.nil?
+        # skip this
+      elsif i < current_step
+        classes.push 'past_step'
+      elsif i == current_step
+        classes.push 'current_step'
+      else
+        classes.push 'future_step'
+      end
+
+      arr.push classes.join(' ')
+    end
+    arr
+  end
+
 end
