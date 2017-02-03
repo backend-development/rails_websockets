@@ -1,27 +1,24 @@
 <% if user_signed_in? %>
+  <div id="step_#{i}_change_status" class="step_change_status">
 
-  <% step = stepstone.step_of(current_user) %>
+    <% 
+      step = stepstone.step_of(current_user) 
+      step ||= Step.new(user:current_user, stepstone:stepstone)
+    %>
 
-  <% if step.nil? %>
+    <% Step.statuses.each do |status| %>
 
-    <%= form_for Step.new(user:current_user, stepstone:stepstone, aasm_state:'working') do |f| %>
-      <%= f.hidden_field(:user_id) %>
-      <%= f.hidden_field(:stepstone_id) %>
-      <%= f.hidden_field(:aasm_state) %>
-      <%= f.submit "start working on #{no}. step" %>
+
+      <%= form_for step do |f| %>
+        <%= f.hidden_field(:user_id) %>
+        <%= f.hidden_field(:stepstone_id) %>
+        <%= f.hidden_field(:aasm_state, value: status) %>
+        <%= f.submit status, disabled: status.to_s == step.aasm_state,
+                             value: status.to_s.humanize %>
+      <% end %>
+
     <% end %>
 
-  <% else %>
-
-    <%= form_for step do |f| %>
-      <%= f.select(
-           :aasm_state, 
-           options_for_select(
-           Step.statuses, 
-           step.aasm_state)) %>
-      <%= f.submit 'set' %>
-    <% end %>
-
-  <% end %>
+  </div>
 
 <% end %>

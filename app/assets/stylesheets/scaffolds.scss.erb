@@ -21,12 +21,18 @@ body {
   box-sizing: border-box;
 }
 
-h1,h2,h3,h4,h5,h6, nav {
+h1,h2,h3, nav {
   font-family: 'Libre Franklin', sans-serif;
-
 }
-nav { font-size: 24px; }
-h1 { font-size: 32px; }
+h1,h2,h3 {
+  font-weight: bold;
+}
+
+nav { font-weight: regular; }
+
+h1 {
+  font-size: 52px;
+}
 
 // --------- numbered steps
 
@@ -48,17 +54,21 @@ h1, h2 {
 
 // ---- show status, again outside if enough room
 
+div.current_step { 
+    border-top: 8px rgba(79,183,239,1) solid;
+}
+
 @media screen and (min-width: 1100px) {
 
-  h2.blocked:after {
+  div.blocked h2:after {
     content: '';
     position: absolute;
-    top: -20px;  left: -70px;
+    top: -20px;  left: -85px;
     width: 70px;
     height: 60px;
     background: url(<%= asset_path('blocked.svg') %>) no-repeat;
   }
-  h2.finished:after {
+  div.finished h2:after {
     content: '';
     position: absolute;
     top: -10px;  left: -60px;
@@ -70,7 +80,7 @@ h1, h2 {
 }
 @media screen and (max-width: 1100px) {
 
-  h2.blocked:after {
+  div.blocked h2:after {
     content: '';
     position: absolute;
     top: -20px;  left: 20px;
@@ -78,7 +88,7 @@ h1, h2 {
     height: 60px;
     background: url(<%= asset_path('blocked.svg') %>) no-repeat;
   }
-  h2.finished:after {
+  div.finished h2:after {
     content: '';
     position: absolute;
     top: -10px;  left: 0px;
@@ -107,7 +117,7 @@ h1, h2 {
   border: 1px #aaa solid;
 }
 
-form.edit_step {
+form.edit_step, form.new_step {
   display: inline;
 }
 
@@ -169,9 +179,10 @@ footer {
   width: 70px;
   height: 85px;
   text-align:center;
-  font-size: 8px;
+  font-family: 'Libre Franklin', sans-serif;
+  font-size: 10px;
   display: inline-block;
-  line-height: 10px;
+  line-height: 12px;
   vertical-align: middle;
   position: relative;
 }
