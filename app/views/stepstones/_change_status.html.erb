@@ -1,5 +1,5 @@
 <% if user_signed_in? %>
-  <div id="step_#{i}_change_status" class="step_change_status">
+  <div id="step_<%= i %>_change_status" class="step_change_status">
 
     <% 
       step = stepstone.step_of(current_user) 

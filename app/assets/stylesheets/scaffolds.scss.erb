@@ -21,10 +21,10 @@ body {
   box-sizing: border-box;
 }
 
-h1,h2,h3, nav {
+h1,h2,h3, nav, input, textarea, label {
   font-family: 'Libre Franklin', sans-serif;
 }
-h1,h2,h3 {
+h1,h2,h3,label {
   font-weight: bold;
 }
 
@@ -112,6 +112,8 @@ div.current_step {
     animation-duration: 1s;
 }
 
+// -------------- sortable list in edit stepstones ------
+
 .sortable li:hover {
   background-color: #ddd;
   border: 1px #aaa solid;
@@ -120,6 +122,8 @@ div.current_step {
 form.edit_step, form.new_step {
   display: inline;
 }
+
+// -------------- chat ------
 
 section#chat {
   background-color: #eef;
@@ -146,6 +150,9 @@ section#chat.holder {
   margin: 0;
 }
 
+// -------------- logo in the header ------
+
+
 .logo {
   height: 85px;
 }
@@ -153,6 +160,9 @@ section#chat.holder {
 svg:hover .step_color {
   fill:blue;
 }
+
+// -------------- layout ------
+
 
 section#main {
   flex: 4;
@@ -173,6 +183,52 @@ footer {
   flex-direction: row;
   justify-content: space-between;  
 }
+
+
+
+article {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; 
+  flex-wrap: wrap;   
+}
+
+.step_description {
+  margin-bottom: 50px;
+}
+.step_status {
+  margin-bottom: 50px;
+  justify-content: space-between; 
+  flex-wrap: wrap;    
+}
+
+@media screen and (min-width: 850px) {
+
+  .step_description {
+    width: 60%;
+    min-width: 500px;
+  }
+  .step_status {
+    width: 30%;
+    min-width: 250px;
+  }
+
+} 
+
+
+#main table, #main textarea, #main .field, #main form, #main > div { width: 100%; }
+
+
+// --------- adventure and steps ----------
+
+.adventure_description {
+  padding-bottom: 60px;
+  border-bottom: 1px #ddd solid;
+  margin-bottom: 60px;
+}
+
+// ------------------- user box ----------------
+
 
 
 .user {
@@ -234,45 +290,20 @@ footer {
   clip-path: url('#circlemask')
 }
 
+// ------------ stuff for forms -------------
 
-article {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between; 
-  flex-wrap: wrap;   
+
+input {
+  font-size: 18px;
 }
-
-.step_description {
-  margin-bottom: 50px;
-}
-.step_status {
-  margin-bottom: 50px;
-  justify-content: space-between; 
-  flex-wrap: wrap;    
-}
-
-@media screen and (min-width: 850px) {
-
-  .step_description {
-    width: 60%;
-    min-width: 500px;
-  }
-  .step_status {
-    width: 30%;
-    min-width: 250px;
-  }
-
-} 
-
-
-#main table, #main textarea, #main .field, #main form, #main > div { width: 100%; }
-
 textarea {
   font-size: 18px;
   height: 150px
 }
-nav {
-}
+
+
+// ------------ stuff in the header -------------
+
 nav a, h1 a, h2 a {
   text-decoration: none;
 }
@@ -283,16 +314,8 @@ nav a.nodecoration:hover, h1 a.nodecoration:hover, h2 a.nodecoration:hover {
   text-decoration: none;
 }
 
-p, ol, ul, td {
 
-  /* margin: 33px; */
-}
-
-pre {
-  background-color: #eee;
-  padding: 10px;
-  font-size: 11px;
-}
+// ----------- links -----------
 
 a {
   color: #000;
@@ -305,6 +328,22 @@ a {
     color: blue;
   }
 }
+
+// ------------ leftovers from scaffold -------------
+
+
+p, ol, ul, td {
+
+  /* margin: 33px; */
+}
+
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 11px;
+}
+
+
 
 th {
   padding-bottom: 5px;

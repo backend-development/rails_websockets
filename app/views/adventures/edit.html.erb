@@ -24,7 +24,7 @@
 
     <% @stepstones.each_with_index do |stepstone,i| %>
 
-      <li><%= stepstone.description %>
+      <li><%= md stepstone.description %>
 
         <%= hidden_field_tag('adventure[stepstone_order][]', stepstone.id) %>
         <% if current_user == @adventure.owner  %>

@@ -11,16 +11,11 @@
   <p><%= link_to "edit", edit_adventure_path(@adventure) %></p>
 <% end %>
 
-<%= @adventure.description %>
+<div class="adventure_description">
+<%= md @adventure.description %>
+</div>
 
 <p>This Adventure consists of <%= @stepstones.length %> steps.</p>  
-
-<pre>
-statuses:
-<%= @my_statuses %>
-current:
-<%= current_step %>
-</pre>
 
 <p>
   <% if not user_signed_in? %>
@@ -40,13 +35,13 @@ current:
       <span class="number"><%= (i + 1).ordinalize %>.</span> Step   
     </h2>
     <article>
-      <div id="step_#{i}_description" class="step_description">
-        <%= stepstone.description %>
+      <div id="step_<%= i %>_description" class="step_description">
+        <%= md stepstone.description %>
         <%= render 'stepstones/change_status', stepstone: stepstone, i: i %>
 
       </div>
 
-      <div id="step_#{i}_show_status" class="step_show_status">
+      <div id="step_<%= i %>_show_status" class="step_show_status">
         <% stepstone.steps.group_by(&:status).each do |status, steps| %>
           <% steps.each do |st| %>
             <% if not st.not_started?  %> 

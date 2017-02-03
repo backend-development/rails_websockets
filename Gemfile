@@ -21,6 +21,8 @@ gem 'aasm'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 
+gem 'redcarpet'
+
 # ----------------- views -------------------------
 gem 'record_tag_helper'
 
