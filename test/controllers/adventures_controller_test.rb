@@ -40,6 +40,7 @@ class AdventuresControllerTest < ActionDispatch::IntegrationTest
         post adventures_url, params: {
           adventure: {
             description: @adventure.description,
+            prefix: @adventure.prefix,
             title: @adventure.title
           }
         }
@@ -76,6 +77,7 @@ class AdventuresControllerTest < ActionDispatch::IntegrationTest
       patch adventure_url(@adventure), params: {
         adventure: {
           description: @adventure.description,
+          prefix: @adventure.prefix,
           title: @adventure.title
         }
       }

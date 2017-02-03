@@ -46,6 +46,8 @@ class AdventuresController < ApplicationController
 
   # PATCH/PUT /adventures/1
   def update
+    Rails.logger.warn("------")
+    Rails.logger.warn(adventure_params.inspect)
     if @adventure.update(adventure_params)
       redirect_to adventures_url, notice: 'Adventure was successfully updated.'
     else
@@ -68,6 +70,6 @@ class AdventuresController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def adventure_params
-    params.require(:adventure).permit(:title, :description)
+    params.require(:adventure).permit(:prefix, :title, :description)
   end
 end

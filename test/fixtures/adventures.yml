@@ -1,11 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  prefix: a1
   title: The first adventure
   description: The first adventure is first
   owner: two
 
 two:
+  prefix: a2
   title: the Second adventure
   description: the 2nd one is even better
   owner: two

@@ -5,17 +5,92 @@ body, nav, footer, .holder {
 body {
   background-color: #fff;
   color: #333;
-  font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 13px;
-  line-height: 18px;
+
+  font-family: 'Libre Baskerville', serif;
+  font-size: 18px;
+  line-height: 28px;
+
   margin: 0px;
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: stretch;
+
   min-height: 100vh;
   box-sizing: border-box;
 }
+
+h1,h2,h3,h4,h5,h6, nav {
+  font-family: 'Libre Franklin', sans-serif;
+
+}
+nav { font-size: 24px; }
+h1 { font-size: 32px; }
+
+// --------- numbered steps
+
+
+h1, h2 {
+  position:relative; 
+  text-indent: -2px;
+}
+
+// ---- outside numbers if enough room
+
+@media screen and (min-width: 1100px) {
+  h2 span.number, h1 span.number {
+    position: absolute;
+    right: 103%;
+    top: 0px;
+  }
+}
+
+// ---- show status, again outside if enough room
+
+@media screen and (min-width: 1100px) {
+
+  h2.blocked:after {
+    content: '';
+    position: absolute;
+    top: -20px;  left: -70px;
+    width: 70px;
+    height: 60px;
+    background: url(<%= asset_path('blocked.svg') %>) no-repeat;
+  }
+  h2.finished:after {
+    content: '';
+    position: absolute;
+    top: -10px;  left: -60px;
+    width: 60px;
+    height: 50px;
+    background: url(<%= asset_path('finished.svg') %>);  
+  }
+
+}
+@media screen and (max-width: 1100px) {
+
+  h2.blocked:after {
+    content: '';
+    position: absolute;
+    top: -20px;  left: 20px;
+    width: 70px;
+    height: 60px;
+    background: url(<%= asset_path('blocked.svg') %>) no-repeat;
+  }
+  h2.finished:after {
+    content: '';
+    position: absolute;
+    top: -10px;  left: 0px;
+    width: 60px;
+    height: 50px;
+    background: url(<%= asset_path('finished.svg') %>);  
+  }
+
+}
+
+
+// -------------- notice ---------
 
 @keyframes flash-animation {  
     from { background: yellow; }
@@ -81,7 +156,6 @@ footer {
 
 .holder {
   width: 100%;
-
   max-width: 1000px;
   padding: 20px;
   margin: 0px auto; 
@@ -120,15 +194,7 @@ footer {
   height: 60px;
   background: url(<%= asset_path('blocked.svg') %>) no-repeat;
 }
-h2.blocked {position:relative;}
-h2.blocked:after {
-  content: '';
-  position: absolute;
-  top: -20px;  left: 20px;
-  width: 70px;
-  height: 60px;
-  background: url(<%= asset_path('blocked.svg') %>) no-repeat;
-}
+
 
 .user.finished {
   background-image: radial-gradient(circle  closest-side at 35px 35px, #004400 0%, #FFFFFF 100%);
@@ -143,15 +209,7 @@ h2.blocked:after {
   background: url(<%= asset_path('finished.svg') %>);
 }
 
-h2.finished { position: relative; }
-h2.finished:after {
-  content: '';
-  position: absolute;
-  top: -10px;  left: 0px;
-  width: 60px;
-  height: 50px;
-  background: url(<%= asset_path('finished.svg') %>);  
-}
+
 
 .user span{
   display: block;
@@ -215,9 +273,7 @@ nav a.nodecoration:hover, h1 a.nodecoration:hover, h2 a.nodecoration:hover {
 }
 
 p, ol, ul, td {
-  font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 13px;
-  line-height: 18px;
+
   /* margin: 33px; */
 }
 

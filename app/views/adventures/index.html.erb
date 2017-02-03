@@ -8,7 +8,10 @@
 
 <% @adventures.each do |adventure| %>
 
-  <h2><%=  link_to adventure.title, adventure_path(adventure)  %></h2>
+  <h2>
+    <span class="number"><%= link_to adventure.prefix, adventure_path(adventure)  %></span>
+    <%=  link_to adventure.title, adventure_path(adventure)  %>
+  </h2>
   <%= adventure.description %>
 
 
