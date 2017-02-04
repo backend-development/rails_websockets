@@ -50,7 +50,8 @@ guard 'livereload' do
   end
 
   # file needing a full reload of the page anyway
-  watch(%r{app/views/.+\.(#{rails_view_exts * '|'})$})
+  # only html templates, not .js.erb or .json.erb, those are served up new anyway
+  watch(%r{app/views/.+.html\.(#{rails_view_exts * '|'})$})
   watch(%r{app/helpers/.+\.rb})
   watch(%r{config/locales/.+\.yml})
 end
