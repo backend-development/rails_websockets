@@ -14,6 +14,7 @@
         <%= f.hidden_field(:stepstone_id) %>
         <%= f.hidden_field(:aasm_state, value: status) %>
         <%= f.submit status, disabled: status.to_s == step.aasm_state,
+                             class: status,
                              value: status.to_s.humanize %>
       <% end %>
 
