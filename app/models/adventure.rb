@@ -1,6 +1,6 @@
 class Adventure < ApplicationRecord
   belongs_to :owner, class_name: 'User', foreign_key: 'user_id', inverse_of: :owned_adventures
-  has_many :stepstones, dependent: :destroy
+  has_many :stepstones, dependent: :destroy, before_add: :set_sort_order
   has_many :steps, through: :stepstones
   has_many :users, -> { distinct }, through: :steps
 
@@ -53,5 +53,15 @@ class Adventure < ApplicationRecord
     # statuses = ["not started", "not started", "finished"]
 
     statuses
+  end
+
+  private
+
+  def set_sort_order(new_stepstone)
+    if stepstones.empty?
+      new_stepstone.sortorder = 0
+    else
+      new_stepstone.sortorder = 1 + stepstones.pluck(:sortorder).max
+    end
   end
 end
